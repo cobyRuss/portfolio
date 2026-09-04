@@ -105,6 +105,19 @@ The AI also asked clarifying questions about my personal information.
 
 ---
 
+## Prompt 8: Debugging SQLite Database Error
+
+**Prompt:** "proceed" (after seeing Internal Server Error on local server)
+
+**AI Response:** The AI identified the error: `Database file at path [...database.sqlite] does not exist`. The default `.env` had `SESSION_DRIVER=database` and `QUEUE_CONNECTION=database` with SQLite, but no database file existed. The AI:
+1. Created the missing `database/database.sqlite` file
+2. Changed `.env` to use `SESSION_DRIVER=file`, `QUEUE_CONNECTION=sync`, `CACHE_STORE=file`
+3. Restarted the server and verified the site loads correctly
+
+**What I did:** Confirmed the fix worked by seeing the portfolio page render successfully.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:
