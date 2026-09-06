@@ -288,9 +288,29 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 1.5rem;
             transition: transform 0.2s;
         }
         .cert-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+        .cert-credential {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+        .cert-credential a {
+            flex-shrink: 0;
+            text-decoration: none;
+        }
+        .cert-credential img {
+            width: 84px;
+            height: 84px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            transition: transform 0.2s;
+        }
+        .cert-credential a:hover img { transform: scale(1.05); }
         .cert-info h3 {
             font-size: 1.1rem;
             font-weight: 600;
@@ -478,9 +498,16 @@
             <div class="cert-list">
                 @foreach($certifications as $cert)
                 <div class="cert-card">
-                    <div class="cert-info">
-                        <h3>{{ $cert['title'] }}</h3>
-                        <div class="cert-meta">{{ $cert['issuer'] }} &middot; {{ $cert['type'] }} &middot; {{ $cert['date'] }}</div>
+                    <div class="cert-credential">
+                        @if(!empty($cert['image']))
+                        <a href="{{ $cert['image'] }}" onclick="openModal(['{{ $cert['image'] }}'], 0); return false;" title="View credential image">
+                            <img src="{{ $cert['image'] }}" alt="{{ $cert['title'] }}">
+                        </a>
+                        @endif
+                        <div class="cert-info">
+                            <h3>{{ $cert['title'] }}</h3>
+                            <div class="cert-meta">{{ $cert['issuer'] }} &middot; {{ $cert['type'] }} &middot; {{ $cert['date'] }}</div>
+                        </div>
                     </div>
                     <span class="cert-status status-{{ strtolower($cert['status']) }}">{{ $cert['status'] }}</span>
                 </div>
