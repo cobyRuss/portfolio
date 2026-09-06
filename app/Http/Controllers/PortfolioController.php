@@ -63,6 +63,32 @@ class PortfolioController extends Controller
             ],
         ];
 
-        return view('portfolio', compact('profile', 'education', 'skills', 'certifications'));
+        $projects = [
+            [
+                'title' => 'Web App - Flowershop Online Website',
+                'type' => 'Web Application',
+                'description' => 'An online flowershop website where customers can browse and order flower arrangements. Built as a web application with product catalog and ordering features.',
+                'images' => [
+                    asset('projects/flowershop/1.png'),
+                    asset('projects/flowershop/2.png'),
+                    asset('projects/flowershop/3.png'),
+                    asset('projects/flowershop/4.png'),
+                ],
+            ],
+            [
+                'title' => 'Registrar Grade Report Keeping System',
+                'type' => 'Offline Application',
+                'description' => 'An offline grade report keeping system for the registrar office, designed to record, manage, and print student grade reports without requiring an internet connection.',
+                'images' => [
+                    asset('projects/rgkrs/1.png'),
+                    asset('projects/rgkrs/2.png'),
+                    asset('projects/rgkrs/3.png'),
+                    asset('projects/rgkrs/4.png'),
+                    asset('projects/rgkrs/5.png'),
+                ],
+            ],
+        ];
+
+        return view('portfolio', compact('profile', 'education', 'skills', 'certifications', 'projects'));
     }
 }

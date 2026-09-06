@@ -330,6 +330,75 @@
         .status-earned { background: #d1fae5; color: #065f46; }
         .status-processing { background: #fef3c7; color: #92400e; }
 
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+        .project-thumb {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: linear-gradient(135deg, var(--primary-light), #f0f9ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .project-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .project-thumb:hover img { transform: scale(1.04); }
+        .project-placeholder {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .project-body {
+            padding: 1.5rem;
+        }
+        .project-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+        .project-type {
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            margin-bottom: 0.6rem;
+        }
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .project-views {
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
         /* Contact */
         .contact-grid {
             display: grid;
@@ -403,6 +472,7 @@
                 <a href="#about">About</a>
                 <a href="#skills">Skills</a>
                 <a href="#certifications">Certifications</a>
+                <a href="#projects">Projects</a>
                 <a href="#contact">Contact</a>
             </div>
         </div>
@@ -510,6 +580,40 @@
                         </div>
                     </div>
                     <span class="cert-status status-{{ strtolower($cert['status']) }}">{{ $cert['status'] }}</span>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" style="background: #f1f5f9;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Projects</h2>
+                <p>Selected work and applications</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="projects-grid">
+                @foreach($projects as $project)
+                <div class="project-card">
+                    <div class="project-thumb"
+                         data-images='@json($project['images'])'
+                         onclick="openModal(JSON.parse(this.getAttribute('data-images')), 0); return false;">
+                        @if(!empty($project['images']) && count($project['images']) > 0)
+                        <img src="{{ $project['images'][0] }}" alt="{{ $project['title'] }}">
+                        @else
+                        <span class="project-placeholder">{{ strtoupper(mb_substr($project['title'], 0, 2)) }}</span>
+                        @endif
+                    </div>
+                    <div class="project-body">
+                        <div class="project-title">{{ $project['title'] }}</div>
+                        <span class="project-type">{{ $project['type'] }}</span>
+                        <div class="project-desc">{{ $project['description'] }}</div>
+                        @if(!empty($project['images']) && count($project['images']) > 0)
+                        <div class="project-views">&#128269; Click to view {{ count($project['images']) }} screenshot{{ count($project['images']) > 1 ? 's' : '' }}</div>
+                        @endif
+                    </div>
                 </div>
                 @endforeach
             </div>
