@@ -21,7 +21,7 @@ class PortfolioController extends Controller
             'school' => 'Data Center College of the Philippines',
             'campus' => 'Bangued',
             'program' => 'Bachelor of Science in Information Technology',
-            'status' => 'Currently Enrolled',
+            'status' => '4th Year - Currently Enrolled',
         ];
 
         $skills = [
