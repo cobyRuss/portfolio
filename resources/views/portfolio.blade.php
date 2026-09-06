@@ -715,7 +715,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; {{ date('Y') }} {{ $profile['name'] }} &middot; Built with Laravel &middot; Integrative Programming Activity 3</p>
+        <p>&copy; 2026 Russel Tristan L. Marzo &middot; Coby</p>
     </footer>
 
     <!-- Image Modal -->
