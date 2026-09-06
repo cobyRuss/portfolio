@@ -399,6 +399,71 @@
             font-weight: 600;
         }
 
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.92);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-image {
+            max-width: 92vw;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            background: #fff;
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2.2rem;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 2002;
+        }
+        .modal-close:hover { color: var(--primary-light); opacity: 0.9; }
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            z-index: 2001;
+        }
+        .modal-nav:hover { background: rgba(255,255,255,0.25); }
+        .modal-prev { left: 1.5rem; }
+        .modal-next { right: 1.5rem; }
+        .modal-counter {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.15);
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+        }
+
         /* Contact */
         .contact-grid {
             display: grid;
@@ -652,6 +717,74 @@
     <footer>
         <p>&copy; {{ date('Y') }} {{ $profile['name'] }} &middot; Built with Laravel &middot; Integrative Programming Activity 3</p>
     </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal-overlay" onclick="closeModal(event)">
+        <button class="modal-close" onclick="closeModal(event)" aria-label="Close">&times;</button>
+        <button class="modal-nav modal-prev" id="modalPrev" onclick="prevImage(event)" aria-label="Previous">&#8249;</button>
+        <img id="modalImage" class="modal-image" alt="Preview">
+        <button class="modal-nav modal-next" id="modalNext" onclick="nextImage(event)" aria-label="Next">&#8250;</button>
+        <div class="modal-counter" id="modalCounter"></div>
+    </div>
+
+    <script>
+        let modalImages = [];
+        let modalIndex = 0;
+
+        function openModal(images, index) {
+            images = (images || []);
+            if (!images.length) return;
+            modalImages = images;
+            modalIndex = index;
+            const modal = document.getElementById('imageModal');
+            const img = document.getElementById('modalImage');
+            img.src = modalImages[modalIndex];
+            updateModalNav();
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateModalNav() {
+            const prev = document.getElementById('modalPrev');
+            const next = document.getElementById('modalNext');
+            const counter = document.getElementById('modalCounter');
+            const multiple = modalImages.length > 1;
+            prev.style.display = multiple ? 'flex' : 'none';
+            next.style.display = multiple ? 'flex' : 'none';
+            counter.style.display = multiple ? 'block' : 'none';
+            if (multiple) {
+                counter.textContent = (modalIndex + 1) + ' / ' + modalImages.length;
+            }
+        }
+
+        function prevImage(event) {
+            event.stopPropagation();
+            modalIndex = (modalIndex - 1 + modalImages.length) % modalImages.length;
+            document.getElementById('modalImage').src = modalImages[modalIndex];
+            updateModalNav();
+        }
+
+        function nextImage(event) {
+            event.stopPropagation();
+            modalIndex = (modalIndex + 1) % modalImages.length;
+            document.getElementById('modalImage').src = modalImages[modalIndex];
+            updateModalNav();
+        }
+
+        function closeModal(event) {
+            if (event && event.target !== event.currentTarget && event.target.className !== 'modal-close') return;
+            document.getElementById('imageModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function (e) {
+            const modal = document.getElementById('imageModal');
+            if (!modal.classList.contains('open')) return;
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowLeft') prevImage(e);
+            if (e.key === 'ArrowRight') nextImage(e);
+        });
+    </script>
 
 </body>
 </html>
