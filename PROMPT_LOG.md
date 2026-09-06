@@ -6,7 +6,7 @@ This document records all AI-assisted interactions during the development of thi
 
 ## Prompt 1: Reading the Activity Requirements
 
-**Prompt:** "c:\Users\coby2\Downloads\Activity_3_Integrative_Programming.pdf this is my activity read and make ask questions if there is something you need something filled up."
+**Prompt:** "lets make an online portfolio, where i can showcase my about or info/skills/certificates and show my contact- i will also send the pdf for u to understan better"
 
 **AI Response:** The AI extracted the PDF content and identified the key requirements:
 - Build a Laravel portfolio website
@@ -118,6 +118,122 @@ The AI also asked clarifying questions about my personal information.
 
 ---
 
+## Prompt 9: Creating the Project Documentation (.docx)
+
+**Prompt:** "proceed" (continuing the session; requested the Project Documentation deliverable)
+
+**AI Response:** The AI extracted the activity PDF to confirm the documentation requirements (overview, features, tech stack, AI-collaboration summary, setup/deployment steps, screenshots), then:
+1. Ran the site locally with `php artisan serve` and captured desktop (full-page) and mobile screenshots using headless Microsoft Edge
+2. Set up PHPWord in a temporary directory (outside the repo) to generate the Word document
+3. Generated `Portfolio_Documentation.docx` with a title page, project overview, feature list, tech-stack table, Laravel MVC explanation, full git commit history table, AI-collaboration summary table, local setup and InfinityFree deployment steps, the two screenshots, and a conclusion
+4. Verified the .docx is a valid Office Open XML file (16 parts, document.xml + 2 embedded images)
+
+A follow-up was needed because PHP's ZIP extension was disabled; the AI enabled it via the CLI flag `-d extension=zip` and regenerated the file.
+
+**What I did:** Accepted the generated documentation and will review it in Word before submission.
+
+---
+
+## Prompt 10: How to Run the Site
+
+**Prompt:** "how to run?"
+
+**AI Response:** Explained that the app runs with `php artisan serve` from the `portfolio-app/` directory, then opening `http://127.0.0.1:8000`.
+
+**What I did:** Applied it as instructed.
+
+---
+
+## Prompt 11: Wrong Site Appearing on Port 8000
+
+**Prompt:** "my flowershop web is whats showing up on the http://127.0.0.1:8000 not the portfolio"
+
+**AI Response:** Diagnosed that XAMPP's Apache (`httpd.exe`) was already listening on port 8000 and serving another project (the flowershop site). Recommended running the portfolio on a different port.
+
+**What I did:** Accepted the diagnosis and the recommendation to use another port.
+
+---
+
+## Prompt 12: Port Conflict / Failed to Load Page
+
+**Prompt:** "Failed to Load Page ERR_CONNECTION_REFUSED (-102) URL: http://127.0.0.1:8080/ its better that its in a diff port since ill still be using the other one for the flowershop site"
+
+**AI Response:** Found that nothing was running on 8080 because the serve command had not started properly, and restarted it detached on port 8080. Verified the portfolio served correctly (HTTP 200).
+
+**What I did:** Confirmed the portfolio loads on `http://127.0.0.1:8080` while keeping the flowershop site on 8000.
+
+---
+
+## Prompt 13: Fix Certifications Data
+
+**Prompt:** "did u get my skills from github? thats nice, remove Certificate of Completion - Web Development Fundamentals [...and] Additional Certification [...] and replace them with these & [screenshot] Civil Service Commission · Eligibility · 2023"
+
+**AI Response:** Clarified that skills come from the controller, not GitHub. Removed the two placeholder "Processing" certifications, added a single Civil Service Professional eligibility (CSC, 2023, Earned), and displayed the provided screenshot as the credential thumbnail.
+
+**What I did:** Accepted the correction and the updated credential.
+
+---
+
+## Prompt 14: Full Certificates List
+
+**Prompt:** gave the civil service screenshot (pasted image) plus two certificate images for DOST Startup Cordillera and DICT Online Safety Through Netiquette.
+
+**AI Response:** Noted the pasted image could not be read (model limitation) and asked for its file path plus the years and issuing organizations for the two certificates.
+
+**What I did:** Provided the requested details.
+
+---
+
+## Prompt 15: Certificate Details
+
+**Prompt:** "& 'c:\Users\coby2\Pictures\Screenshots\Screenshot 2026-09-05 175735.png' heres the image for civil service--- 2. Sept 2 2026 and 3. July 23 2026"
+
+**AI Response:** Copied the civil service screenshot into the app and updated the Certifications section with three entries: Civil Service Professional (CSC, 2023), DOST Startup Cordillera (DOST-CAR, September 2, 2026), and Online Safety Through Netiquette (DICT, July 23, 2026), each with a thumbnail.
+
+**What I did:** Accepted. Noted the AI assumed the DOST issuer name and said I would correct it if needed.
+
+---
+
+## Prompt 16: Add Projects Section with Image Modal
+
+**Prompt:** "add a projects area. ill provide the title for the projects and the corresponding images first is Web App (Flowershop Online website) [...]. 2nd one is an offline app (Registrar Grade Report Keeping System) [...]. all images are numbered show 1 first. when i click images open it as a modal, not in new tab, do the same for the images in certificates and eligibility"
+
+**AI Response:** Added a Projects section (Flowershop web app with 4 numbered screenshots; Registrar system placeholder), made image thumbnails open in a custom modal with prev/next navigation and a counter, and changed certificate/eligibility images to open in the same modal instead of a new tab.
+
+**What I did:** Accepted; confirmed which images belonged to which project.
+
+---
+
+## Prompt 17: Registrar Screenshots, Fix Project Click, Profile Photo
+
+**Prompt:** "heres the link to the folder containing 5 images for the Registrar Grade Report Keeping System (Offline App) c:\Users\coby2\Downloads\rgkrs-------- i cant click the images on the projects" and "c:\Users\coby2\Downloads\249081502.png and heres my image to put in the big circle RM"
+
+**AI Response:** Added the 5 Registrar screenshots. Fixed the broken project thumbnail clicks: the JSON image array rendered with double quotes inside the double-quoted HTML `onclick` attribute, breaking the handler; switched to a `data-images` attribute read via `JSON.parse`. Also set the hero avatar to show the provided profile photo instead of the "RM" initials.
+
+**What I did:** Accepted the fix and confirmed the profile photo appears in the circle.
+
+---
+
+## Prompt 18: Education Status and Footer
+
+**Prompt:** "on the Status Currently Enrolled--add 4th Year before Currently Enrolled and replace © 2026 Russel Tristan L. Marzo · Built with Laravel · Integrative Programming Activity 3 with just © 2026 Russel Tristan L. Marzo · Coby"
+
+**AI Response:** Updated the education status to "4th Year - Currently Enrolled" and simplified the footer to "© 2026 Russel Tristan L. Marzo · Coby".
+
+**What I did:** Accepted both changes.
+
+---
+
+## Prompt 19: Create Prompt Log
+
+**Prompt:** "make a prompt_log.md to record all the prompts i made"
+
+**AI Response:** Appended the prompts from the continuation session (Prompts 10-19) to PROMPT_LOG.md and refreshed the collaboration notes.
+
+**What I did:** Accepted the updated log.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:
@@ -128,14 +244,14 @@ The AI assistant (opencode/big-pickle) was used for:
 - **Version Control:** Setting up git and making incremental commits
 - **Documentation:** Creating this prompt log
 
-All AI-generated code was reviewed and accepted as-is because:
-- The data structure matched my requirements
-- The code followed Laravel best practices
-- The design was clean and professional
-- The git history was properly incremental
+All AI-generated code was reviewed and accepted, with several prompts needing follow-up corrections that the AI resolved:
+- Port conflict with XAMPP Apache (switched to port 8080)
+- Certifications placeholder data corrected with real credentials
+- Project thumbnail clicks broken by JSON quoting (fixed with a data attribute)
+- Screenshot file paths gathered when an inline pasted image could not be read
 
-No prompts needed follow-up corrections during this session.
+Every correction was confirmed against the live site before moving on.
 
 ---
 
-*Log created by AI assistant on September 4, 2026*
+*Log created by AI assistant on September 4, 2026, and updated on September 5, 2026*
