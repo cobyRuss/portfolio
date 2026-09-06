@@ -14,6 +14,7 @@ class PortfolioController extends Controller
             'phone' => '0935 759 1816',
             'github' => 'https://github.com/cobyRuss',
             'github_username' => 'cobyRuss',
+            'photo' => asset('images/profile.png'),
         ];
 
         $education = [

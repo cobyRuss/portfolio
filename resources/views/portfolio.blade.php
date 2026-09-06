@@ -142,6 +142,12 @@
             font-weight: 800;
             color: white;
         }
+        .hero-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
 
         /* Sections */
         section {
@@ -395,7 +401,7 @@
                 </div>
             </div>
             <div class="hero-avatar">
-                <span class="avatar-text">RM</span>
+                <img src="{{ $profile['photo'] }}" alt="{{ $profile['name'] }}" class="hero-photo">
             </div>
         </div>
     </section>
