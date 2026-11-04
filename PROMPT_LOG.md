@@ -234,6 +234,36 @@ A follow-up was needed because PHP's ZIP extension was disabled; the AI enabled 
 
 ---
 
+## Prompt 20: Full UI Rebuild with Modal Slider & Responsive Layout
+
+**Prompt:** Requested a full modern rebuild of the portfolio UI reusing all existing bio, 4th-Year BSIT education, skills (including SQLite), certifications (CSC, DOST, DICT), and projects (Flowershop Web App, Registrar Grade Report Keeping System), with structural placeholders, native CSS hover/load animations, certificate pop-up modal, project screenshot modal slider, and social links.
+
+**AI Response:** Rebuilt `PortfolioController.php` and `portfolio.blade.php` with a modern responsive layout, smooth CSS fade-in and card hover animations, custom pop-up modal for certificates, multi-slide modal gallery with prev/next/keyboard/touch navigation for projects, and started the local server on port 8080.
+
+**What I did:** Previewed the rebuilt portfolio locally on `http://127.0.0.1:8080`.
+
+---
+
+## Prompt 21: 2x3 Contact Grid & Slim Footer
+
+**Prompt:** "Move the Facebook, Messenger, and Instagram links out of the footer and turn them into contact cards matching the existing ones. Arrange all six contact cards into a responsive 2x3 grid in the Contact Me section. Finally, slim down the footer so it only contains the copyright text: '© 2026 Russel Tristan L. Marzo · Coby'."
+
+**AI Response:** Added Facebook, Messenger, and Instagram cards into `.contact-grid` alongside Email, Phone, and GitHub in a responsive 2x3 layout (3 columns on desktop, 2 on tablet, 1 on mobile) and simplified the footer to display only the copyright text.
+
+**What I did:** Verified the 6-card contact grid and compact footer on the live preview.
+
+---
+
+## Prompt 22: Midnight Slate Dark Theme, Light/Dark Switch & Cursor Spotlight
+
+**Prompt:** Asked for design suggestions so the portfolio feels less plain—specifically exploring a darker background and subtle cursor-reactive effects without distracting from achievements and experience. Selected Midnight Slate dark mode with a navbar Light/Dark toggle plus a soft cursor-following spotlight and glowing card borders.
+
+**AI Response:** Implemented a Midnight Slate dark theme default (`data-theme="dark"`) with a persistent Light/Dark toggle in the navbar, a 650px ambient cursor-following radial spotlight, and proximity-reactive glowing 1px card borders (automatically disabled on touch devices for mobile performance).
+
+**What I did:** Reviewed and accepted the interactive dark theme upgrade, then requested pushing the updated project to GitHub.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:
