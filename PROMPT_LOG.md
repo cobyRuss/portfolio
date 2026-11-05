@@ -264,6 +264,46 @@ A follow-up was needed because PHP's ZIP extension was disabled; the AI enabled 
 
 ---
 
+## Prompt 23: Remove Redundant 4th-Year Mentions & Simplify Bio
+
+**Prompt:** "this bitch show im 4th year 3 times, what should we dooo?" (Noted duplicate 4th-Year badges and bio repetition).
+
+**AI Response:** Cleaned up redundant entries across the hero and about section. Removed the top hero badge, updated the hero intro to a concise tagline, swapped duplicate chips in About Me to "System Administration", and consolidated the 4th-Year student status exclusively inside the Education card.
+
+**What I did:** Verified single appearance of the status and clearer layout.
+
+---
+
+## Prompt 24: Add Cisco Modern AI & DICT Philippine Startup Challenge XI Certificates
+
+**Prompt:** Added certificates for "Introduction to Modern AI - Cisco Networking Academy Program (Oct 30 2026)" and "Understanding Startups & Getting Your Idea Ready for the Philippine Startup Challenge XI (Sept 7 2026)".
+
+**AI Response:** Added both certificate images to `public/certifications/`, updated the credentials array in `PortfolioController.php`, and adjusted layout rules.
+
+**What I did:** Confirmed all 5 credentials appear correctly with modal previews.
+
+---
+
+## Prompt 25: Horizontal Slider & Full-Screen Grid Modal for Certifications
+
+**Prompt:** Restructured the Certifications section to display as a smooth horizontal slider track with left/right overlay buttons, while creating a full-screen grid modal accessible via "View All Grid" and directly through the navbar "Certifications" link.
+
+**AI Response:** Updated HTML, CSS slider track rules, and JavaScript scroll math/modal trigger handlers specifically for the certifications section without affecting other areas.
+
+**What I did:** Tested smooth sliding and instant modal display from the navbar.
+
+---
+
+## Prompt 26: Update Flowershop Screenshots, Add 88 Mini Mart POS Project & Clean Up Tags
+
+**Prompt:** Replaced existing Flowershop Online Website screenshots with 9 numbered images, added "Desktop App - 88 Mini Mart POS System" with 6 screenshots, and removed tag pills from the bottom of project cards.
+
+**AI Response:** Updated project assets in `public/projects/`, updated `PortfolioController.php` with 88 Mini Mart POS metadata, and streamlined card design by removing bottom tag badges.
+
+**What I did:** Verified all project sliders and confirmed clean card presentation.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:
