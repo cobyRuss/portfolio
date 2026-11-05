@@ -10,7 +10,7 @@ class PortfolioController extends Controller
             'name' => 'Russel Tristan L. Marzo',
             'nickname' => 'Coby',
             'title' => 'IT Student & Aspiring Developer',
-            'status_badge' => '4th-Year BSIT Student',
+            'tagline' => 'Building clean, practical web applications and offline software systems with modern web technologies.',
             'about' => 'A dedicated Information Technology student at Data Center College of the Philippines - Bangued, passionate about software development and web technologies. Currently building skills in web development, programming, and system administration.',
             'email' => 'coby.2339@gmail.com',
             'phone' => '0935 759 1816',
@@ -80,6 +80,26 @@ class PortfolioController extends Controller
                 'image' => asset('certifications/dict-online-safety.png'),
                 'link' => '', // Optional: insert external verification URL here
             ],
+            [
+                'title' => 'Introduction to Modern AI',
+                'issuer' => 'Cisco Networking Academy Program',
+                'type' => 'Certificate',
+                'date' => 'October 30, 2026',
+                'status' => 'Earned',
+                // Structural placeholders: update image path in public/certifications/ or verification link below
+                'image' => asset('certifications/cisco-modern-ai.jpg'),
+                'link' => '', // Optional: insert external verification URL here
+            ],
+            [
+                'title' => 'Understanding Startups & Getting Your Idea Ready for the Philippine Startup Challenge XI',
+                'issuer' => 'DICT - Cordillera Administrative Region',
+                'type' => 'Certificate',
+                'date' => 'September 7, 2026',
+                'status' => 'Earned',
+                // Structural placeholders: update image path in public/certifications/ or verification link below
+                'image' => asset('certifications/dict-psc-xi-startups.jpg'),
+                'link' => '', // Optional: insert external verification URL here
+            ],
         ];
 
         $projects = [
@@ -94,6 +114,11 @@ class PortfolioController extends Controller
                     asset('projects/flowershop/2.png'),
                     asset('projects/flowershop/3.png'),
                     asset('projects/flowershop/4.png'),
+                    asset('projects/flowershop/5.png'),
+                    asset('projects/flowershop/6.png'),
+                    asset('projects/flowershop/7.png'),
+                    asset('projects/flowershop/8.png'),
+                    asset('projects/flowershop/9.png'),
                 ],
             ],
             [
@@ -108,6 +133,20 @@ class PortfolioController extends Controller
                     asset('projects/rgkrs/3.png'),
                     asset('projects/rgkrs/4.png'),
                     asset('projects/rgkrs/5.png'),
+                ],
+            ],
+            [
+                'title' => 'Desktop App - 88 Mini Mart POS System',
+                'type' => 'Desktop Application',
+                'description' => 'An offline Point of Sale (POS) system designed for retail management. Built as a desktop application featuring real-time inventory tracking, sales transaction processing, and automated receipt generation for daily store operations.',
+                'tags' => ['Desktop App', 'POS System', 'Inventory Tracking', 'Offline'],
+                'images' => [
+                    asset('projects/88minimart/1.png'),
+                    asset('projects/88minimart/2.png'),
+                    asset('projects/88minimart/3.png'),
+                    asset('projects/88minimart/4.png'),
+                    asset('projects/88minimart/5.png'),
+                    asset('projects/88minimart/6.png'),
                 ],
             ],
         ];
