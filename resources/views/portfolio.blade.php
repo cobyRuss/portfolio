@@ -913,11 +913,66 @@
             background: linear-gradient(90deg, #10b981, #34d399);
         }
 
-        /* Certifications Grid */
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+        /* Certifications Horizontal Slider & Full-Screen Grid Modal */
+        .certifications-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.35rem;
+        }
+
+        .certifications-header-row .subsection-title {
+            margin-bottom: 0;
+        }
+
+        .cert-view-all-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--primary);
+            font-family: inherit;
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: border-color 0.2s, background-color 0.2s, transform 0.2s var(--ease-out);
+        }
+
+        .cert-view-all-btn:hover {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+            transform: translateY(-1px);
+        }
+
+        .certifications-slider-wrapper {
+            position: relative;
+        }
+
+        .certifications-slider-track {
+            display: flex;
             gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            padding: 0.4rem 0.25rem 1rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .certifications-slider-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .certifications-slider-track .cert-card {
+            flex: 0 0 345px;
+            width: 345px;
+            max-width: 345px;
+            scroll-snap-align: start;
         }
 
         .cert-card {
@@ -925,6 +980,131 @@
             display: flex;
             flex-direction: column;
             gap: 1.15rem;
+        }
+
+        .cert-slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-55%);
+            z-index: 12;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px solid var(--border-hover);
+            background: rgba(17, 26, 46, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #f8fafc;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(2, 6, 23, 0.55);
+            transition: background-color 0.22s var(--ease-out), border-color 0.22s var(--ease-out), transform 0.22s var(--ease-out), opacity 0.22s;
+        }
+
+        [data-theme="light"] .cert-slider-arrow {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .cert-slider-arrow:hover {
+            background: var(--btn-primary-bg);
+            border-color: var(--btn-primary-bg);
+            color: #ffffff;
+            transform: translateY(-55%) scale(1.08);
+        }
+
+        .cert-slider-arrow svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .cert-arrow-left {
+            left: -18px;
+        }
+
+        .cert-arrow-right {
+            right: -18px;
+        }
+
+        /* Full-Screen Certifications Grid Modal (#cert-full-modal) */
+        #cert-full-modal.modal {
+            position: fixed;
+            inset: 0;
+            z-index: 2200;
+            background: rgba(11, 17, 30, 0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            overflow-y: auto;
+            padding: 3rem 1.5rem 4rem;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.28s var(--ease-out), visibility 0.28s var(--ease-out);
+        }
+
+        [data-theme="light"] #cert-full-modal.modal {
+            background: rgba(15, 23, 42, 0.82);
+        }
+
+        #cert-full-modal.modal.is-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .cert-full-modal-inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            transform: translateY(14px) scale(0.98);
+            transition: transform 0.3s var(--ease-out);
+        }
+
+        #cert-full-modal.modal.is-open .cert-full-modal-inner {
+            transform: translateY(0) scale(1);
+        }
+
+        .cert-full-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.15rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        .cert-full-modal-title-wrap h3 {
+            font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+            font-weight: 800;
+            color: #f8fafc;
+            margin-bottom: 0.25rem;
+        }
+
+        .cert-full-modal-title-wrap p {
+            font-size: 0.92rem;
+            color: #94a3b8;
+        }
+
+        .cert-modal-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .cert-modal-grid .cert-card {
+            flex: 1 1 300px;
+            max-width: calc(33.333% - 1rem);
+            background: #111a2e;
+            border-color: rgba(148, 163, 184, 0.18);
+        }
+
+        [data-theme="light"] .cert-modal-grid .cert-card {
+            background: #ffffff;
+            border-color: #e2e8f0;
         }
 
         .cert-thumb-btn {
@@ -1506,6 +1686,18 @@
                 grid-template-columns: 1fr;
             }
 
+            .cert-modal-grid .cert-card {
+                max-width: calc(50% - 0.75rem);
+            }
+
+            .cert-arrow-left {
+                left: 0.35rem;
+            }
+
+            .cert-arrow-right {
+                right: 0.35rem;
+            }
+
             .contact-grid {
                 grid-template-columns: repeat(2, 1fr);
                 max-width: 680px;
@@ -1582,9 +1774,24 @@
                 text-align: left;
             }
 
-            .projects-grid,
-            .cert-grid {
+            .projects-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .certifications-slider-track .cert-card {
+                flex: 0 0 300px;
+                width: 300px;
+                max-width: 84vw;
+            }
+
+            .cert-modal-grid .cert-card {
+                max-width: 100%;
+                flex-basis: 100%;
+            }
+
+            .cert-slider-arrow {
+                width: 40px;
+                height: 40px;
             }
 
             .modal-backdrop {
@@ -1684,14 +1891,9 @@
         <section class="hero" id="top">
             <div class="container hero-grid">
                 <div class="hero-content fade-in" style="--delay: 0.05s;">
-                    <div class="hero-badge">
-                        <span class="hero-badge-dot"></span>
-                        <span>{{ $profile['status_badge'] }} &middot; {{ $education['campus'] }}</span>
-                    </div>
-
                     <h1 class="hero-title">{{ $profile['name'] }}</h1>
                     <p class="hero-role">{{ $profile['title'] }}</p>
-                    <p class="hero-bio">{{ $profile['about'] }}</p>
+                    <p class="hero-bio">{{ $profile['tagline'] }}</p>
 
                     <div class="hero-actions">
                         <a href="#projects" class="btn btn-primary">
@@ -1736,7 +1938,7 @@
                 <div class="section-header fade-in" style="--delay: 0.08s;">
                     <span class="section-eyebrow">Profile &amp; Academics</span>
                     <h2>About &amp; Education</h2>
-                    <p>Background, academic journey, and current focus as a 4th-Year BSIT student.</p>
+                    <p>Academic background, technical focus, and passion for building practical software.</p>
                 </div>
 
                 <div class="about-grid">
@@ -1755,9 +1957,9 @@
                         <p class="about-text">{{ $profile['about'] }}</p>
 
                         <div class="about-highlights">
-                            <span class="highlight-chip">4th-Year BSIT Student</span>
                             <span class="highlight-chip">Web &amp; Offline Systems</span>
                             <span class="highlight-chip">Software Development</span>
+                            <span class="highlight-chip">System Administration</span>
                         </div>
                     </article>
 
@@ -1830,83 +2032,108 @@
                     @endforeach
                 </div>
 
-                <!-- Certifications Anchor & Grid -->
+                <!-- Certifications Horizontal Slider Subsection -->
                 <div id="certifications" style="scroll-margin-top: 96px;">
-                    <h3 class="subsection-title">
-                        Certifications &amp; Eligibility
-                        <span class="count-pill">{{ count($certifications) }} Credentials</span>
-                    </h3>
+                    <div class="certifications-header-row">
+                        <h3 class="subsection-title">
+                            Certifications &amp; Eligibility
+                            <span class="count-pill">{{ count($certifications) }} Credentials</span>
+                        </h3>
+                        <button type="button" class="cert-view-all-btn" onclick="openCertFullModal()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            View All Grid
+                        </button>
+                    </div>
 
-                    <div class="cert-grid">
-                        @foreach($certifications as $certIndex => $cert)
-                            <article class="card-surface cert-card fade-in" style="--delay: {{ number_format(0.08 * ($certIndex + 1), 2) }}s;">
-                                <!-- Structural Placeholder: Certificate Image Thumbnail (Opens in Custom Pop-Up Modal, NOT a new tab) -->
-                                <button
-                                    type="button"
-                                    class="cert-thumb-btn"
-                                    data-title="{{ $cert['title'] }} — {{ $cert['issuer'] }}"
-                                    data-images='@json([!empty($cert['image']) ? $cert['image'] : ""])'
-                                    onclick="openGalleryFromTrigger(this)"
-                                    aria-label="Preview certificate for {{ $cert['title'] }}"
-                                >
-                                    @if(!empty($cert['image']))
-                                        <img
-                                            src="{{ $cert['image'] }}"
-                                            alt="{{ $cert['title'] }} credential preview"
-                                            loading="lazy"
-                                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                                        >
-                                    @endif
-                                    <div class="media-placeholder" style="{{ !empty($cert['image']) ? 'display: none;' : 'display: flex;' }}">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                            <rect x="3" y="4" width="18" height="16" rx="2"></rect>
-                                            <circle cx="9" cy="10" r="2"></circle>
-                                            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
-                                        </svg>
-                                        <span>Certificate Image Placeholder</span>
-                                    </div>
-                                    <span class="cert-hover-hint">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                            <circle cx="11" cy="11" r="8"></circle>
-                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                            <line x1="11" y1="8" x2="11" y2="14"></line>
-                                            <line x1="8" y1="11" x2="14" y2="11"></line>
-                                        </svg>
-                                        Preview in Modal
-                                    </span>
-                                </button>
+                    <div class="certifications-slider-wrapper">
+                        <button type="button" id="certSlideLeft" class="cert-slider-arrow cert-arrow-left" aria-label="Slide certificates left">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
 
-                                <div class="cert-body">
-                                    <div class="cert-top-meta">
-                                        <span class="cert-type">{{ $cert['type'] }}</span>
-                                        <span class="cert-status">{{ $cert['status'] }}</span>
-                                    </div>
-                                    <h4 class="cert-title">{{ $cert['title'] }}</h4>
-                                    <p class="cert-issuer">{{ $cert['issuer'] }}</p>
-                                </div>
-
-                                <div class="cert-footer">
-                                    <span>{{ $cert['date'] }}</span>
-                                    <div class="cert-action-group">
-                                        <button
-                                            type="button"
-                                            class="link-btn"
-                                            data-title="{{ $cert['title'] }} — {{ $cert['issuer'] }}"
-                                            data-images='@json([!empty($cert['image']) ? $cert['image'] : ""])'
-                                            onclick="openGalleryFromTrigger(this)"
-                                        >
-                                            View Certificate
-                                        </button>
-                                        {{-- Structural Placeholder: Insert official verification URL in PortfolioController 'link' key --}}
-                                        @if(!empty($cert['link']))
-                                            <a href="{{ $cert['link'] }}" class="link-btn" target="_blank" rel="noopener noreferrer">
-                                                Verify &nearr;
-                                            </a>
+                        <div class="certifications-slider-track" id="certSliderTrack">
+                            @foreach($certifications as $certIndex => $cert)
+                                <article class="card-surface cert-card fade-in" style="--delay: {{ number_format(0.08 * ($certIndex + 1), 2) }}s;">
+                                    <!-- Structural Placeholder: Certificate Image Thumbnail (Opens in Custom Pop-Up Modal, NOT a new tab) -->
+                                    <button
+                                        type="button"
+                                        class="cert-thumb-btn"
+                                        data-title="{{ $cert['title'] }} — {{ $cert['issuer'] }}"
+                                        data-images='@json([!empty($cert['image']) ? $cert['image'] : ""])'
+                                        onclick="openGalleryFromTrigger(this)"
+                                        aria-label="Preview certificate for {{ $cert['title'] }}"
+                                    >
+                                        @if(!empty($cert['image']))
+                                            <img
+                                                src="{{ $cert['image'] }}"
+                                                alt="{{ $cert['title'] }} credential preview"
+                                                loading="lazy"
+                                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                            >
                                         @endif
+                                        <div class="media-placeholder" style="{{ !empty($cert['image']) ? 'display: none;' : 'display: flex;' }}">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                                                <circle cx="9" cy="10" r="2"></circle>
+                                                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+                                            </svg>
+                                            <span>Certificate Image Placeholder</span>
+                                        </div>
+                                        <span class="cert-hover-hint">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="11" cy="11" r="8"></circle>
+                                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                                <line x1="11" y1="8" x2="11" y2="14"></line>
+                                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                                            </svg>
+                                            Preview in Modal
+                                        </span>
+                                    </button>
+
+                                    <div class="cert-body">
+                                        <div class="cert-top-meta">
+                                            <span class="cert-type">{{ $cert['type'] }}</span>
+                                            <span class="cert-status">{{ $cert['status'] }}</span>
+                                        </div>
+                                        <h4 class="cert-title">{{ $cert['title'] }}</h4>
+                                        <p class="cert-issuer">{{ $cert['issuer'] }}</p>
                                     </div>
-                                </div>
-                            </article>
-                        @endforeach
+
+                                    <div class="cert-footer">
+                                        <span>{{ $cert['date'] }}</span>
+                                        <div class="cert-action-group">
+                                            <button
+                                                type="button"
+                                                class="link-btn"
+                                                data-title="{{ $cert['title'] }} — {{ $cert['issuer'] }}"
+                                                data-images='@json([!empty($cert['image']) ? $cert['image'] : ""])'
+                                                onclick="openGalleryFromTrigger(this)"
+                                            >
+                                                View Certificate
+                                            </button>
+                                            {{-- Structural Placeholder: Insert official verification URL in PortfolioController 'link' key --}}
+                                            @if(!empty($cert['link']))
+                                                <a href="{{ $cert['link'] }}" class="link-btn" target="_blank" rel="noopener noreferrer">
+                                                    Verify &nearr;
+                                                </a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </article>
+                            @endforeach
+                        </div>
+
+                        <button type="button" id="certSlideRight" class="cert-slider-arrow cert-arrow-right" aria-label="Slide certificates right">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1970,14 +2197,6 @@
                                 <span class="project-badge">{{ $project['type'] }}</span>
                                 <h3 class="project-title">{{ $project['title'] }}</h3>
                                 <p class="project-desc">{{ $project['description'] }}</p>
-
-                                @if(!empty($project['tags']))
-                                    <div class="project-tags">
-                                        @foreach($project['tags'] as $tag)
-                                            <span class="project-tag">{{ $tag }}</span>
-                                        @endforeach
-                                    </div>
-                                @endif
 
                                 <div class="project-footer">
                                     <button
@@ -2084,6 +2303,91 @@
             <p class="footer-copy">&copy; 2026 Russel Tristan L. Marzo &middot; Coby</p>
         </div>
     </footer>
+
+    <!-- ========================================================================
+         Full-Screen Certifications Grid Modal (#cert-full-modal)
+         ======================================================================== -->
+    <div id="cert-full-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="certFullModalTitle" onclick="handleCertFullBackdrop(event)">
+        <div class="cert-full-modal-inner">
+            <div class="cert-full-modal-header">
+                <div class="cert-full-modal-title-wrap">
+                    <h3 id="certFullModalTitle">Certifications &amp; Eligibility</h3>
+                    <p>All {{ count($certifications) }} verified credentials and certificates</p>
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closeCertFullModal()" aria-label="Close certifications modal">&times;</button>
+            </div>
+
+            <div class="cert-modal-grid">
+                @foreach($certifications as $cert)
+                    <article class="card-surface cert-card">
+                        <button
+                            type="button"
+                            class="cert-thumb-btn"
+                            data-title="{{ $cert['title'] }} — {{ $cert['issuer'] }}"
+                            data-images='@json([!empty($cert['image']) ? $cert['image'] : ""])'
+                            onclick="openGalleryFromTrigger(this)"
+                            aria-label="Preview certificate for {{ $cert['title'] }}"
+                        >
+                            @if(!empty($cert['image']))
+                                <img
+                                    src="{{ $cert['image'] }}"
+                                    alt="{{ $cert['title'] }} credential preview"
+                                    loading="lazy"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                >
+                            @endif
+                            <div class="media-placeholder" style="{{ !empty($cert['image']) ? 'display: none;' : 'display: flex;' }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                                    <circle cx="9" cy="10" r="2"></circle>
+                                    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+                                </svg>
+                                <span>Certificate Image Placeholder</span>
+                            </div>
+                            <span class="cert-hover-hint">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Preview Full Image
+                            </span>
+                        </button>
+
+                        <div class="cert-body">
+                            <div class="cert-top-meta">
+                                <span class="cert-type">{{ $cert['type'] }}</span>
+                                <span class="cert-status">{{ $cert['status'] }}</span>
+                            </div>
+                            <h4 class="cert-title">{{ $cert['title'] }}</h4>
+                            <p class="cert-issuer">{{ $cert['issuer'] }}</p>
+                        </div>
+
+                        <div class="cert-footer">
+                            <span>{{ $cert['date'] }}</span>
+                            <div class="cert-action-group">
+                                <button
+                                    type="button"
+                                    class="link-btn"
+                                    data-title="{{ $cert['title'] }} — {{ $cert['issuer'] }}"
+                                    data-images='@json([!empty($cert['image']) ? $cert['image'] : ""])'
+                                    onclick="openGalleryFromTrigger(this)"
+                                >
+                                    View Certificate
+                                </button>
+                                @if(!empty($cert['link']))
+                                    <a href="{{ $cert['link'] }}" class="link-btn" target="_blank" rel="noopener noreferrer">
+                                        Verify &nearr;
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+        </div>
+    </div>
 
     <!-- ========================================================================
          Custom Pop-Up Modal & Project Image Slider
@@ -2272,7 +2576,9 @@
 
             window.closeModal = function () {
                 modal.classList.remove('is-open');
-                document.body.style.overflow = '';
+                if (!certFullModal || !certFullModal.classList.contains('is-open')) {
+                    document.body.style.overflow = '';
+                }
             };
 
             window.handleBackdropClick = function (event) {
@@ -2281,11 +2587,72 @@
                 }
             };
 
+            /* ----------------------------------------------------------------
+               4. Certifications Horizontal Slider & Full-Screen Grid Modal
+               ---------------------------------------------------------------- */
+            const certSliderTrack = document.getElementById('certSliderTrack');
+            const certSlideLeft = document.getElementById('certSlideLeft');
+            const certSlideRight = document.getElementById('certSlideRight');
+            const certFullModal = document.getElementById('cert-full-modal');
+
+            function getCertScrollAmount() {
+                if (!certSliderTrack) return 369;
+                const firstCard = certSliderTrack.querySelector('.cert-card');
+                const gap = parseFloat(window.getComputedStyle(certSliderTrack).gap) || 24;
+                return (firstCard ? firstCard.offsetWidth : 345) + gap;
+            }
+
+            if (certSlideLeft && certSliderTrack) {
+                certSlideLeft.addEventListener('click', function () {
+                    certSliderTrack.scrollBy({ left: -getCertScrollAmount(), behavior: 'smooth' });
+                });
+            }
+
+            if (certSlideRight && certSliderTrack) {
+                certSlideRight.addEventListener('click', function () {
+                    certSliderTrack.scrollBy({ left: getCertScrollAmount(), behavior: 'smooth' });
+                });
+            }
+
+            window.openCertFullModal = function () {
+                if (!certFullModal) return;
+                certFullModal.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
+            };
+
+            window.closeCertFullModal = function () {
+                if (!certFullModal) return;
+                certFullModal.classList.remove('is-open');
+                if (!modal.classList.contains('is-open')) {
+                    document.body.style.overflow = '';
+                }
+            };
+
+            window.handleCertFullBackdrop = function (event) {
+                if (event.target === certFullModal) {
+                    closeCertFullModal();
+                }
+            };
+
+            const certNavLink = document.querySelector('.nav-links a[href="#certifications"]');
+            if (certNavLink) {
+                certNavLink.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (navToggle) navToggle.checked = false;
+                    openCertFullModal();
+                });
+            }
+
             document.addEventListener('keydown', function (e) {
-                if (!modal.classList.contains('is-open')) return;
-                if (e.key === 'Escape') closeModal();
-                if (e.key === 'ArrowLeft') changeSlide(-1);
-                if (e.key === 'ArrowRight') changeSlide(1);
+                if (modal.classList.contains('is-open')) {
+                    if (e.key === 'Escape') closeModal();
+                    if (e.key === 'ArrowLeft') changeSlide(-1);
+                    if (e.key === 'ArrowRight') changeSlide(1);
+                    return;
+                }
+                if (certFullModal && certFullModal.classList.contains('is-open') && e.key === 'Escape') {
+                    closeCertFullModal();
+                }
             });
 
             modal.addEventListener('touchstart', function (e) {
