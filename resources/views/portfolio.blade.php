@@ -2836,32 +2836,60 @@
             const certSlideRight = document.getElementById('certSlideRight');
             const certFullModal = document.getElementById('cert-full-modal');
 
-            /* Precise card-by-card scroll navigation (prevents skipping) */
+            /* Precise card-by-card index stepper navigation (prevents skipping) */
             function scrollSliderTrack(track, direction, cardSelector) {
                 if (!track) return;
                 const cards = Array.from(track.querySelectorAll(cardSelector));
                 if (!cards.length) return;
 
-                const trackLeft = track.getBoundingClientRect().left;
-                if (direction > 0) {
-                    // Moving forward: find the next card whose left edge is past trackLeft + 25px
-                    const nextCard = cards.find(card => card.getBoundingClientRect().left > trackLeft + 25);
-                    if (nextCard) {
-                        const delta = nextCard.getBoundingClientRect().left - trackLeft;
-                        track.scrollBy({ left: delta, behavior: 'smooth' });
+                const trackRect = track.getBoundingClientRect();
+                const trackLeft = trackRect.left;
+
+                // Determine active card based on distance to track left edge
+                let activeIndex = 0;
+                let minDiff = Infinity;
+                cards.forEach((card, idx) => {
+                    const diff = Math.abs(card.getBoundingClientRect().left - trackLeft);
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        activeIndex = idx;
                     }
-                } else {
-                    // Moving backward: find the card preceding current view
-                    const prevCards = cards.filter(card => card.getBoundingClientRect().left < trackLeft - 25);
-                    if (prevCards.length > 0) {
-                        const prevCard = prevCards[prevCards.length - 1];
-                        const delta = prevCard.getBoundingClientRect().left - trackLeft;
-                        track.scrollBy({ left: delta, behavior: 'smooth' });
-                    } else {
-                        track.scrollTo({ left: 0, behavior: 'smooth' });
-                    }
+                });
+
+                // If user clicks rapidly while animating, step from the pending target index
+                let fromIndex = activeIndex;
+                if (typeof track._targetIndex === 'number' && !isNaN(track._targetIndex)) {
+                    fromIndex = track._targetIndex;
                 }
+
+                let targetIndex = fromIndex + direction;
+                targetIndex = Math.max(0, Math.min(cards.length - 1, targetIndex));
+                track._targetIndex = targetIndex;
+
+                const targetCard = cards[targetIndex];
+                const targetScroll = Math.max(
+                    0,
+                    Math.min(
+                        track.scrollWidth - track.clientWidth,
+                        targetCard.getBoundingClientRect().left - trackLeft + track.scrollLeft
+                    )
+                );
+
+                // Temporarily disable CSS scroll-snap to prevent mobile WebKit overshooting
+                track.style.scrollSnapType = 'none';
+                track.scrollTo({ left: targetScroll, behavior: 'smooth' });
+
+                clearTimeout(track._snapTimer);
+                track._snapTimer = setTimeout(() => {
+                    track.style.scrollSnapType = '';
+                    track._targetIndex = null;
+                }, 450);
             }
+
+            ['touchstart', 'mousedown'].forEach(function (evt) {
+                if (certSliderTrack) certSliderTrack.addEventListener(evt, function () { certSliderTrack._targetIndex = null; }, { passive: true });
+                if (projSliderTrack) projSliderTrack.addEventListener(evt, function () { projSliderTrack._targetIndex = null; }, { passive: true });
+            });
 
             if (certSlideLeft && certSliderTrack) {
                 certSlideLeft.addEventListener('click', function () {

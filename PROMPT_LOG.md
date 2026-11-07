@@ -424,6 +424,23 @@ A follow-up was needed because PHP's ZIP extension was disabled; the AI enabled 
 
 ---
 
+## Prompt 35: Fix Slider Skipping 88 Minimart When Navigating Backward on Mobile
+
+**Prompt:** "on phone when im from the last project then i cleck the left button; it skips one project; the 88 minimart, fix that"
+
+**AI Response:** 
+1. **Identified the Root Cause:** On iOS Safari (WebKit), calling programmatic smooth scrolls on a container with active `scroll-snap-type: x mandatory` triggered snap inertia overshooting past the 3rd project (88 Mini Mart) onto the 2nd project (Registrar). Additionally, fuzzy pixel threshold matching (`< trackLeft - 25`) miscalculated target cards when near scroll boundary limits.
+2. **Deterministic Index-Based Card Stepper:**
+   - Replaced pixel delta calculation with a deterministic index stepper (`getActiveCardIndex(track, cards)`): from Card 3 (Student Attendance), clicking left guarantees `targetIndex = 2` (88 Mini Mart).
+   - Dynamically disables `scrollSnapType = 'none'` during programmatic scrolling so WebKit does not fight or overshoot the target, re-enabling it once smoothly centered.
+   - Computes target scroll position directly using the card's exact bounding coordinates relative to track offset.
+   - Added sequential pending index tracking (`track._targetIndex`) so rapid button taps reliably queue each card in order without skipping.
+3. **Synchronized and Built:** Updated `portfolio.blade.php`, `index.html`, and compiled production bundle with Vite (`npm run build`).
+
+**What I did:** Tested sequential navigation backwards from Card 4 (Student Attendance) to Card 3 (88 Mini Mart) to Card 2 (Registrar) to Card 1 (Flowershop), verified no card is skipped on mobile viewports, and pushed to GitHub `origin main`.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:
