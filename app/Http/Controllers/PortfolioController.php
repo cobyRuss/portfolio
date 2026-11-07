@@ -37,16 +37,16 @@ class PortfolioController extends Controller
         ];
 
         $skills = [
-            ['name' => 'Laravel', 'level' => 'Beginner', 'category' => 'Backend'],
-            ['name' => 'PHP', 'level' => 'Intermediate', 'category' => 'Backend'],
-            ['name' => 'HTML5', 'level' => 'Intermediate', 'category' => 'Frontend'],
-            ['name' => 'CSS3', 'level' => 'Intermediate', 'category' => 'Frontend'],
-            ['name' => 'JavaScript', 'level' => 'Beginner', 'category' => 'Frontend'],
-            ['name' => 'MySQL', 'level' => 'Intermediate', 'category' => 'Database'],
-            ['name' => 'SQLite', 'level' => 'Beginner', 'category' => 'Database'],
-            ['name' => 'Git & GitHub', 'level' => 'Beginner', 'category' => 'Tools'],
-            ['name' => 'VS Code', 'level' => 'Intermediate', 'category' => 'Tools'],
-            ['name' => 'XAMPP', 'level' => 'Intermediate', 'category' => 'Tools'],
+            ['name' => 'Laravel', 'category' => 'Backend', 'icon' => 'laravel'],
+            ['name' => 'PHP', 'category' => 'Backend', 'icon' => 'php'],
+            ['name' => 'HTML5', 'category' => 'Frontend', 'icon' => 'html5'],
+            ['name' => 'CSS3', 'category' => 'Frontend', 'icon' => 'css3'],
+            ['name' => 'JavaScript', 'category' => 'Frontend', 'icon' => 'javascript'],
+            ['name' => 'MySQL', 'category' => 'Database', 'icon' => 'mysql'],
+            ['name' => 'SQLite', 'category' => 'Database', 'icon' => 'sqlite'],
+            ['name' => 'Git & GitHub', 'category' => 'Tools', 'icon' => 'github'],
+            ['name' => 'VS Code', 'category' => 'Tools', 'icon' => 'vscode'],
+            ['name' => 'XAMPP', 'category' => 'Tools', 'icon' => 'xampp'],
         ];
 
         $certifications = [
