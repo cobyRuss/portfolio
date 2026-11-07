@@ -387,6 +387,24 @@ A follow-up was needed because PHP's ZIP extension was disabled; the AI enabled 
 
 ---
 
+## Prompt 33: Center Mobile Navigation Bar Contents & Swap Hero Action Button Colors
+
+**Prompt:** "center the navbar contents on the phone (about/skills/certifications/projects) except the light/dark switch keep it on the right ----------and switch the colors of the view projects and contact me on both pc and cp"
+
+**AI Response:** 
+1. **Centered Mobile Navigation Contents:** 
+   - Positioned `.nav-right` with `display: flex; justify-content: center; position: relative; width: 100%;`.
+   - Set `.nav-links` to `justify-content: center; width: 100%; padding: 0 42px;` so that the 4 navigation links (`About`, `Skills`, `Certifications`, `Projects`) are optically and geometrically centered on phone viewports.
+   - Pinned `.theme-toggle-btn` to the far right (`position: absolute; right: 0; top: 50%; transform: translateY(-50%);`), keeping the theme switch anchored on the right without crowding or misaligning the centered links.
+2. **Swapped Hero Button Colors (Desktop & Mobile):**
+   - Transformed "Contact Me" into the vibrant primary action button (`btn btn-primary`) with the accent blue fill, white text, and luminous elevation shadow.
+   - Converted "View Projects" into the refined secondary action button (`btn btn-secondary`) with the surface slate background and border styling.
+3. **Synchronized and Built:** Updated `portfolio.blade.php`, `index.html`, and compiled production assets with Vite (`npm run build`).
+
+**What I did:** Tested centering of mobile navbar links on simulated phone viewports, verified theme switch stays anchored to the right edge, confirmed swapped button styles on desktop and mobile, and pushed to GitHub `origin main`.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:

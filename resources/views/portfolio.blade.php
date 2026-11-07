@@ -1836,8 +1836,8 @@
                 width: 100%;
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
-                gap: 0.3rem;
+                justify-content: center;
+                position: relative;
             }
 
             .nav-links {
@@ -1848,10 +1848,12 @@
                 background: transparent;
                 border: none;
                 box-shadow: none;
-                padding: 0;
+                padding: 0 42px;
+                display: flex;
                 flex-direction: row;
                 align-items: center;
-                gap: 0.15rem;
+                justify-content: center;
+                gap: 0.25rem;
                 opacity: 1;
                 visibility: visible;
                 transform: none;
@@ -1859,7 +1861,7 @@
                 scrollbar-width: none;
                 -ms-overflow-style: none;
                 -webkit-overflow-scrolling: touch;
-                flex: 1;
+                width: 100%;
                 min-width: 0;
             }
 
@@ -1868,8 +1870,8 @@
             }
 
             .nav-links a {
-                padding: 0.35rem 0.45rem;
-                font-size: 0.8rem;
+                padding: 0.35rem 0.5rem;
+                font-size: 0.82rem;
                 font-weight: 600;
                 color: var(--text-secondary);
                 white-space: nowrap;
@@ -1883,24 +1885,16 @@
                 background-color: transparent;
             }
 
-            .nav-links a.nav-cta {
-                margin-left: 0.2rem;
-                padding: 0.4rem 0.85rem;
-                font-size: 0.8rem;
-                font-weight: 700;
-                background: var(--btn-primary-bg);
-                color: #ffffff !important;
-                border-radius: var(--radius-full);
-                box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
-                white-space: nowrap;
-                flex-shrink: 0;
-            }
-
             .theme-toggle-btn {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
                 width: 36px;
                 height: 36px;
                 border-radius: 10px;
                 flex-shrink: 0;
+                z-index: 2;
             }
 
             .theme-toggle-btn svg {
@@ -2113,7 +2107,7 @@
                     <p class="hero-bio">{{ $profile['tagline'] }}</p>
 
                     <div class="hero-actions">
-                        <a href="#projects" class="btn btn-primary">
+                        <a href="#projects" class="btn btn-secondary">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
                                 <line x1="8" y1="21" x2="16" y2="21"></line>
@@ -2121,7 +2115,7 @@
                             </svg>
                             View Projects
                         </a>
-                        <a href="#contact" class="btn btn-secondary">
+                        <a href="#contact" class="btn btn-primary">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                                 <polyline points="22,6 12,13 2,6"></polyline>
