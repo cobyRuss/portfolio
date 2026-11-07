@@ -360,6 +360,19 @@ A follow-up was needed because PHP's ZIP extension was disabled; the AI enabled 
 
 ---
 
+## Prompt 31: Mobile Topbar Redesign, Native Certifications Navigation & Compact 6-Link Contact Grid
+
+**Prompt:** "why did the certifications on the navbar take me to view all grid on certifications? it should take mo the where it is located and can you make it so that when my web is visited on phone; there is no RM icon at the top and insted its the 2nd pic as the navbar, and also on phone i want the contact me links to fit in the screen(all 6 of the at the same time) that means removing the icon name and the text/info of my links below it-------------these changes are when viewing on the phone"
+
+**AI Response:** 
+1. **Restored Native Section Scrolling for Certifications:** Removed the JavaScript `click` interceptor on `.nav-links a[href="#certifications"]` so clicking "Certifications" in the navbar smoothly scrolls to the `#certifications` section on the page rather than forcibly launching the grid modal.
+2. **Mobile Horizontal Navbar (Matching Design):** For mobile viewports, hid the `RM Coby.` logo and hamburger menu toggle, displaying the clean horizontal navlinks (`About`, `Skills`, `Certifications`, `Projects`, `Contact Me` pill, and `Theme Toggle`) in a unified, scrollable top bar matching the requested UI.
+3. **Compact 6-Link Contact Grid for Phones:** Hid the contact titles and text descriptions on mobile screens and rearranged the 6 contact links into a balanced 3x2 grid of icon tiles so all 6 links fit simultaneously on mobile screens without requiring vertical scrolling.
+
+**What I did:** Verified smooth in-page navigation to certifications, confirmed the horizontal mobile navbar layout, and validated the compact 6-link contact grid on phone viewports.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:

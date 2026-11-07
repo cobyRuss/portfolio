@@ -1813,55 +1813,99 @@
                 padding: 4rem 0;
             }
 
+            /* Mobile Horizontal Navbar (No RM icon, horizontal links + CTA + Theme Toggle) */
+            .navbar {
+                height: 60px;
+            }
+
+            .nav-inner {
+                height: 60px;
+                padding: 0 0.5rem;
+            }
+
+            .logo {
+                display: none !important;
+            }
+
+            .nav-toggle,
             .nav-toggle-label {
-                display: inline-flex;
+                display: none !important;
+            }
+
+            .nav-right {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.3rem;
             }
 
             .nav-links {
-                position: absolute;
-                top: 72px;
-                left: 0;
-                right: 0;
-                background: var(--surface-solid);
-                border-bottom: 1px solid var(--border);
-                box-shadow: var(--shadow-md);
-                flex-direction: column;
-                align-items: stretch;
-                padding: 1rem 1.5rem 1.35rem;
-                gap: 0.35rem;
-                opacity: 0;
-                visibility: hidden;
-                transform: translateY(-8px);
-                transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out), visibility 0.25s;
+                position: static;
+                top: auto;
+                left: auto;
+                right: auto;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                flex-direction: row;
+                align-items: center;
+                gap: 0.15rem;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                -webkit-overflow-scrolling: touch;
+                flex: 1;
+                min-width: 0;
+            }
+
+            .nav-links::-webkit-scrollbar {
+                display: none;
             }
 
             .nav-links a {
-                padding: 0.7rem 1rem;
-                border-radius: 10px;
+                padding: 0.35rem 0.45rem;
+                font-size: 0.8rem;
+                font-weight: 600;
+                color: var(--text-secondary);
+                white-space: nowrap;
+                flex-shrink: 0;
+                border-radius: var(--radius-full);
+            }
+
+            .nav-links a:hover,
+            .nav-links a:focus {
+                color: var(--text-primary);
+                background-color: transparent;
             }
 
             .nav-links a.nav-cta {
-                margin-left: 0;
-                margin-top: 0.35rem;
-                text-align: center;
+                margin-left: 0.2rem;
+                padding: 0.4rem 0.85rem;
+                font-size: 0.8rem;
+                font-weight: 700;
+                background: var(--btn-primary-bg);
+                color: #ffffff !important;
+                border-radius: var(--radius-full);
+                box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+                white-space: nowrap;
+                flex-shrink: 0;
             }
 
-            .nav-toggle:checked ~ .nav-links {
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0);
+            .theme-toggle-btn {
+                width: 36px;
+                height: 36px;
+                border-radius: 10px;
+                flex-shrink: 0;
             }
 
-            .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
-                transform: translateY(7px) rotate(45deg);
-            }
-
-            .nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
-                transform: translateY(-7px) rotate(-45deg);
+            .theme-toggle-btn svg {
+                width: 18px;
+                height: 18px;
             }
 
             .edu-row {
@@ -1921,10 +1965,37 @@
             .modal-next { right: 0.5rem; }
         }
 
-        @media (max-width: 560px) {
+        /* Mobile Contact Grid: All 6 links fit simultaneously on screen as compact icon tiles */
+        @media (max-width: 640px) {
             .contact-grid {
-                grid-template-columns: 1fr;
-                max-width: 420px;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 0.75rem;
+                max-width: 360px;
+                margin: 0 auto;
+            }
+
+            .contact-card {
+                padding: 1.05rem 0.5rem;
+                min-height: auto;
+                gap: 0;
+                border-radius: var(--radius-lg);
+            }
+
+            .contact-icon-wrap {
+                margin-bottom: 0;
+                width: 48px;
+                height: 48px;
+                border-radius: 14px;
+            }
+
+            .contact-icon-wrap svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .contact-card h3,
+            .contact-card p {
+                display: none !important;
             }
         }
 
@@ -2857,14 +2928,7 @@
                 }
             };
 
-            const certNavLink = document.querySelector('.nav-links a[href="#certifications"]');
-            if (certNavLink) {
-                certNavLink.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    if (navToggle) navToggle.checked = false;
-                    openCertFullModal();
-                });
-            }
+// Certifications nav link scrolls natively to #certifications
 
             document.addEventListener('keydown', function (e) {
                 if (modal.classList.contains('is-open')) {
