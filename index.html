@@ -3495,19 +3495,34 @@
             };
 
             /* ----------------------------------------------------------------
-               4. Certifications Horizontal Slider & Full-Screen Grid Modal
+               4. Slider Navigation Elements (Certifications & Projects)
                ---------------------------------------------------------------- */
             const certSliderTrack = document.getElementById('certSliderTrack');
             const certSlideLeft = document.getElementById('certSlideLeft');
             const certSlideRight = document.getElementById('certSlideRight');
             const certFullModal = document.getElementById('cert-full-modal');
 
-            /* Precise card-by-card index stepper navigation (prevents skipping) */
+            const projSliderTrack = document.getElementById('projSliderTrack');
+            const projSlideLeft = document.getElementById('projSlideLeft');
+            const projSlideRight = document.getElementById('projSlideRight');
+
+            /* Precise slider navigation: card-by-card index stepper on mobile; smooth step on desktop */
             function scrollSliderTrack(track, direction, cardSelector) {
                 if (!track) return;
                 const cards = Array.from(track.querySelectorAll(cardSelector));
                 if (!cards.length) return;
 
+                const isMobile = window.innerWidth <= 768;
+
+                if (!isMobile) {
+                    // On desktop/PC: scroll smoothly by 1 card step (card width + gap)
+                    const cardWidth = cards[0].offsetWidth || 360;
+                    const step = cardWidth + 24;
+                    track.scrollBy({ left: step * direction, behavior: 'smooth' });
+                    return;
+                }
+
+                // On mobile: precise card-by-card index stepper (never skips)
                 const trackRect = track.getBoundingClientRect();
                 const trackLeft = trackRect.left;
 
@@ -3522,7 +3537,6 @@
                     }
                 });
 
-                // If user clicks rapidly while animating, step from the pending target index
                 let fromIndex = activeIndex;
                 if (typeof track._targetIndex === 'number' && !isNaN(track._targetIndex)) {
                     fromIndex = track._targetIndex;
@@ -3541,7 +3555,6 @@
                     )
                 );
 
-                // Temporarily disable CSS scroll-snap to prevent mobile WebKit overshooting
                 track.style.scrollSnapType = 'none';
                 track.scrollTo({ left: targetScroll, behavior: 'smooth' });
 
@@ -3570,13 +3583,6 @@
                     scrollSliderTrack(certSliderTrack, 1, '.cert-card');
                 });
             }
-
-            /* ----------------------------------------------------------------
-               Projects Horizontal Slider Controls
-               ---------------------------------------------------------------- */
-            const projSliderTrack = document.getElementById('projSliderTrack');
-            const projSlideLeft = document.getElementById('projSlideLeft');
-            const projSlideRight = document.getElementById('projSlideRight');
 
             if (projSlideLeft && projSliderTrack) {
                 projSlideLeft.addEventListener('click', function () {

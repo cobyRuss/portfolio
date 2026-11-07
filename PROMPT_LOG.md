@@ -441,6 +441,23 @@ A follow-up was needed because PHP's ZIP extension was disabled; the AI enabled 
 
 ---
 
+## Prompt 36: Fix Desktop and Mobile Slider Arrow Clicks (Resolved Temporal Dead Zone ReferenceError)
+
+**Prompt:** "motherfucker the left right buttons dont work now; both on projects and certificates; i tried on pc"
+
+**AI Response:** 
+1. **Identified the Exact Root Cause:** A `ReferenceError: Cannot access 'projSliderTrack' before initialization` was triggered on page load because an event listener binding referenced `projSliderTrack` before its `const` variable was declared later in the script block. This unhandled JavaScript runtime error halted execution and prevented all click event listeners from attaching.
+2. **Reordered Variable Declarations:** Consolidated all slider navigation element references (`certSliderTrack`, `certSlideLeft`, `certSlideRight`, `certFullModal`, `projSliderTrack`, `projSlideLeft`, `projSlideRight`) at the very top of the script block to eliminate any Temporal Dead Zone access.
+3. **Adaptive Slider Step Logic:**
+   - On Desktop/PC (`window.innerWidth > 768`): Buttons execute a smooth scroll step by card width (`cards[0].offsetWidth + 24`), advancing or rewinding cards cleanly without layout constraints.
+   - On Mobile (`window.innerWidth <= 768`): Executes the precise card-by-card index stepper with temporary snap suspension to prevent skipping or overshooting.
+4. **Automated Testing:** Ran headless browser automated test suites confirming that both left and right buttons work smoothly on both desktop and mobile viewports with zero runtime errors.
+5. **Synchronized and Built:** Updated `portfolio.blade.php`, `index.html`, and compiled production bundle with Vite (`npm run build`).
+
+**What I did:** Verified that clicking left/right buttons functions as intended on desktop and mobile, confirmed 88 Minimart is reached with no skips, and pushed the commit to GitHub `origin main`.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:
