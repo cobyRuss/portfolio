@@ -953,9 +953,9 @@
         }
 
         .certifications-slider-track .cert-card {
-            flex: 0 0 345px;
-            width: 345px;
-            max-width: 345px;
+            flex: 0 0 360px;
+            width: 360px;
+            max-width: 360px;
             scroll-snap-align: start;
         }
 
@@ -1265,9 +1265,9 @@
         }
 
         .projects-slider-track .project-card {
-            flex: 0 0 370px;
-            width: 370px;
-            max-width: 370px;
+            flex: 0 0 360px;
+            width: 360px;
+            max-width: 360px;
             scroll-snap-align: start;
             border-radius: var(--radius-lg);
             overflow: hidden;
@@ -1508,14 +1508,9 @@
         }
 
         @media (hover: none), (pointer: coarse) {
-            .cert-slider-arrow:active {
-                transform: translateY(-55%) scale(0.92);
-                background: var(--btn-primary-bg);
-                color: #ffffff;
-            }
-
+            .cert-slider-arrow:active,
             .proj-slider-arrow:active {
-                transform: translateY(-50%) scale(0.92);
+                transform: scale(0.92);
                 background: var(--btn-primary-bg);
                 color: #ffffff;
             }
@@ -1911,39 +1906,45 @@
                 text-align: left;
             }
 
+            .certifications-slider-wrapper,
+            .projects-slider-wrapper {
+                position: relative;
+                padding-bottom: 3.6rem;
+            }
+
+            .certifications-slider-track .cert-card,
             .projects-slider-track .project-card {
                 flex: 0 0 320px;
                 width: 320px;
-                max-width: 86vw;
+                max-width: 85vw;
             }
 
+            .cert-slider-arrow,
             .proj-slider-arrow {
-                width: 40px;
-                height: 40px;
+                position: absolute;
+                top: auto;
+                bottom: 0.2rem;
+                transform: none;
+                width: 44px;
+                height: 44px;
+                z-index: 10;
             }
 
+            .cert-arrow-left,
             .proj-arrow-left {
-                left: -10px;
+                left: calc(50% - 48px);
+                right: auto;
             }
 
+            .cert-arrow-right,
             .proj-arrow-right {
-                right: -10px;
-            }
-
-            .certifications-slider-track .cert-card {
-                flex: 0 0 300px;
-                width: 300px;
-                max-width: 84vw;
+                left: calc(50% + 4px);
+                right: auto;
             }
 
             .cert-modal-grid .cert-card {
                 max-width: 100%;
                 flex-basis: 100%;
-            }
-
-            .cert-slider-arrow {
-                width: 40px;
-                height: 40px;
             }
 
             .modal-backdrop {
@@ -1994,6 +1995,7 @@
         }
 
         @media (max-width: 480px) {
+            .certifications-slider-track .cert-card,
             .projects-slider-track .project-card {
                 flex: 0 0 85vw;
                 width: 85vw;
@@ -2017,12 +2019,6 @@
             }
             .project-footer {
                 padding-top: 0.85rem;
-            }
-            .proj-arrow-left {
-                left: -6px;
-            }
-            .proj-arrow-right {
-                right: -6px;
             }
         }
 

@@ -405,6 +405,25 @@ A follow-up was needed because PHP's ZIP extension was disabled; the AI enabled 
 
 ---
 
+## Prompt 34: Unify Card Dimensions Across Certifications and Projects & Relocate Mobile Slider Controls Below Cards
+
+**Prompt:** "on phone again, the sizes(noticably the width) of the cards are different on certificates and projects are different and the left and right buttons are covering some of the text, wth bro; fix that shit"
+
+**AI Response:** 
+1. **Unified Card Widths Across All Breakpoints:**
+   - On phones (`max-width: 480px`): Both `.certifications-slider-track .cert-card` and `.projects-slider-track .project-card` now share identical dimensions (`flex: 0 0 85vw; width: 85vw; max-width: 85vw;`).
+   - On tablets (`max-width: 768px`): Both share `flex: 0 0 320px; width: 320px; max-width: 85vw;`.
+   - On desktop: Both share unified `flex: 0 0 360px; width: 360px; max-width: 360px;`.
+2. **Eliminated Text-Obscuring Mobile Slider Arrows:**
+   - Moved `.cert-slider-arrow` and `.proj-slider-arrow` from `top: 50%` floating directly over the titles and badges to a dedicated bottom controls position (`bottom: 0.2rem;`) centered beneath the cards (`left: calc(50% - 48px)` and `left: calc(50% + 4px)`).
+   - Removed horizontal arrow overrides (`left: -6px`, `right: -6px`) on mobile that were intruding into the card area.
+   - All card titles, badges, descriptions, and media are now 100% unobstructed, while the navigation arrows are ergonomically placed for thumb interaction.
+3. **Synchronized and Built:** Updated `portfolio.blade.php`, `index.html`, and compiled production bundle with Vite (`npm run build`).
+
+**What I did:** Verified equal card sizing on both Certifications and Projects sliders on phone viewports, confirmed that slider arrow controls are cleanly positioned underneath the cards without covering text, and pushed the commit to GitHub.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:
