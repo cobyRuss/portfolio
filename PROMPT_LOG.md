@@ -373,6 +373,20 @@ A follow-up was needed because PHP's ZIP extension was disabled; the AI enabled 
 
 ---
 
+## Prompt 32: Replace Header GitHub Button with Contact Me CTA & Remove Contact Me from Navbar
+
+**Prompt:** "remove the github(cobyRuss) on the header and replace it with the contact me on the nav bar(that means removing it from the navbar too) this applies in both desktops and phones"
+
+**AI Response:** 
+1. **Removed Contact Me from Navbar:** Deleted `<a href="#contact" class="nav-cta">Contact Me</a>` from the primary navigation bar in both desktop and mobile views, leaving a streamlined 4-item menu (`About`, `Skills`, `Certifications`, `Projects`) alongside the theme toggle button.
+2. **Replaced Hero Secondary Action:** Removed the `GitHub (cobyRuss)` secondary button in the hero header section and replaced it with a direct "Contact Me" button (`<a href="#contact" class="btn btn-secondary">... Contact Me</a>`) featuring an email envelope icon.
+3. **Preserved Comprehensive Social Links:** GitHub remains fully accessible along with Email, Phone, Facebook, Messenger, and Instagram in the dedicated Contact section grid at the bottom of the page.
+4. **Synchronized and Built:** Updated `portfolio.blade.php`, `index.html`, and rebuilt production bundle with Vite (`npm run build`).
+
+**What I did:** Tested navigation and hero call-to-action buttons across desktop and mobile screens, verified smooth scrolling to the contact section, and pushed the updates to GitHub.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:
