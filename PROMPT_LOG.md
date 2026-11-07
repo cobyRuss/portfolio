@@ -346,6 +346,20 @@ A follow-up was needed because PHP's ZIP extension was disabled; the AI enabled 
 
 ---
 
+## Prompt 30: Mobile UI Enhancements (Condensed Description, Card-Targeted Slider Navigation & Sticky Hover Removal)
+
+**Prompt:** "on the projects, the description is too long on one of the that it doesnt fit the phone, and when i click the buttons(left or right) the highlight stays; it shouldnt; same with the certificates, and on the projects again when i click on the right button, it skips the 3rd project, i had to manually slide them slowly with a swipe to see the project, the highlight also persists in the contacts below-------------these are all on phone"
+
+**AI Response:** 
+1. **Shortened Student Attendance Description:** Trimmed from 77 words down to a concise, balanced 26 words matching the other three projects, fitting comfortably inside phone screen viewports without overflowing.
+2. **Prevented Skipping Cards in Slider:** Replaced imprecise pixel offset calculation with a card-by-card boundary-targeted navigation algorithm (`scrollSliderTrack`) that finds the exact adjacent card and scrolls smoothly to it without skipping.
+3. **Eliminated Persistent Mobile Tap Highlights:** Guarded all `:hover` rules (`.proj-slider-arrow:hover`, `.cert-slider-arrow:hover`, `.contact-card:hover`, `.skill-card:hover`) behind `@media (hover: hover) and (pointer: fine)`, and substituted momentary `:active` touch feedback for mobile devices so buttons and contact links never stay stuck in a highlighted state.
+4. **Added Automatic Focus Clearing:** Added `this.blur()` on click events for slider arrows to remove mobile browser focus outlines.
+
+**What I did:** Verified mobile responsive layout, smooth sequential card stepping without skipping, and clean tap responses without lingering highlight states.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:

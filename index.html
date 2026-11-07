@@ -23,6 +23,7 @@
            Design Tokens — Default: Dark Midnight Slate + Light Mode Override
            ========================================================================== */
         *, *::before, *::after {
+            -webkit-tap-highlight-color: transparent;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -865,12 +866,7 @@
             transition: transform var(--transition-fast), background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
         }
 
-        .skill-card:hover .skill-icon-wrap {
-            transform: scale(1.08);
-            background: var(--primary);
-            color: #ffffff;
-            border-color: var(--primary);
-        }
+
 
         .skill-icon-wrap svg {
             width: 24px;
@@ -997,12 +993,7 @@
             box-shadow: var(--shadow-md);
         }
 
-        .cert-slider-arrow:hover {
-            background: var(--btn-primary-bg);
-            border-color: var(--btn-primary-bg);
-            color: #ffffff;
-            transform: translateY(-55%) scale(1.08);
-        }
+
 
         .cert-slider-arrow svg {
             width: 20px;
@@ -1406,12 +1397,7 @@
             box-shadow: var(--shadow-md);
         }
 
-        .proj-slider-arrow:hover {
-            background: var(--btn-primary-bg);
-            border-color: var(--btn-primary-bg);
-            color: #ffffff;
-            transform: translateY(-50%) scale(1.08);
-        }
+
 
         .proj-slider-arrow svg {
             width: 20px;
@@ -1458,12 +1444,7 @@
             transition: background-color 0.25s var(--ease-out), border-color 0.25s var(--ease-out), color 0.25s var(--ease-out), transform 0.25s var(--ease-out);
         }
 
-        .contact-card:hover .contact-icon-wrap {
-            background: var(--btn-primary-bg);
-            border-color: var(--btn-primary-bg);
-            color: #ffffff;
-            transform: scale(1.08);
-        }
+
 
         .contact-icon-wrap svg {
             width: 24px;
@@ -1479,6 +1460,75 @@
             color: var(--text-secondary);
             font-size: 0.92rem;
             word-break: break-word;
+        }
+
+        
+        /* Touch & Focus Cleanups: prevent sticky hover on mobile */
+        .cert-slider-arrow,
+        .proj-slider-arrow,
+        .contact-card {
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .cert-slider-arrow:focus,
+        .proj-slider-arrow:focus,
+        .contact-card:focus {
+            outline: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .cert-slider-arrow:hover {
+                background: var(--btn-primary-bg);
+                border-color: var(--btn-primary-bg);
+                color: #ffffff;
+                transform: translateY(-55%) scale(1.08);
+            }
+
+            .proj-slider-arrow:hover {
+                background: var(--btn-primary-bg);
+                border-color: var(--btn-primary-bg);
+                color: #ffffff;
+                transform: translateY(-50%) scale(1.08);
+            }
+
+            .contact-card:hover .contact-icon-wrap {
+                background: var(--btn-primary-bg);
+                border-color: var(--btn-primary-bg);
+                color: #ffffff;
+                transform: scale(1.08);
+            }
+
+            .skill-card:hover .skill-icon-wrap {
+                transform: scale(1.08);
+                background: var(--primary);
+                color: #ffffff;
+                border-color: var(--primary);
+            }
+        }
+
+        @media (hover: none), (pointer: coarse) {
+            .cert-slider-arrow:active {
+                transform: translateY(-55%) scale(0.92);
+                background: var(--btn-primary-bg);
+                color: #ffffff;
+            }
+
+            .proj-slider-arrow:active {
+                transform: translateY(-50%) scale(0.92);
+                background: var(--btn-primary-bg);
+                color: #ffffff;
+            }
+
+            .contact-card:active .contact-icon-wrap {
+                background: var(--btn-primary-bg);
+                color: #ffffff;
+            }
+
+            .skill-card:active .skill-icon-wrap {
+                background: var(--primary);
+                color: #ffffff;
+            }
         }
 
         /* ==========================================================================
@@ -1880,15 +1930,28 @@
 
         @media (max-width: 480px) {
             .projects-slider-track .project-card {
-                flex: 0 0 86vw;
-                width: 86vw;
-                max-width: 86vw;
+                flex: 0 0 85vw;
+                width: 85vw;
+                max-width: 85vw;
+            }
+            .project-media-btn {
+                aspect-ratio: 16 / 9;
             }
             .project-body {
-                padding: 1.2rem;
+                padding: 1.15rem 1.15rem 1.25rem;
             }
             .project-title {
-                font-size: 1.08rem;
+                font-size: 1.06rem;
+                line-height: 1.3;
+                margin-bottom: 0.45rem;
+            }
+            .project-desc {
+                font-size: 0.86rem;
+                line-height: 1.5;
+                margin-bottom: 0.9rem;
+            }
+            .project-footer {
+                padding-top: 0.85rem;
             }
             .proj-arrow-left {
                 left: -6px;
@@ -2750,7 +2813,7 @@
                             <div class="project-body">
                                 <span class="project-badge">Mobile Application</span>
                                 <h3 class="project-title">Mobile App - Offline Student Attendance System</h3>
-                                <p class="project-desc">An offline-first mobile attendance management application built with Flutter &amp; Dart for seamless classroom session tracking without internet connectivity. Features an instructor workspace dashboard displaying real-time academic stats (active students, enrolled subjects, and daily attendance percentages), interactive attendance recording with multi-criteria session filters (academic year, class section, and subject like Mobile Technology 4A), one-tap batch marking ('All Present'), individual status toggles (Present, Late, Absent, Excused) with student ID/photo badges and remark notes, and searchable historical attendance logs with date range filtering and export capabilities.</p>
+                                <p class="project-desc">An offline attendance tracking mobile app built with Flutter &amp; Dart. Features real-time session logging, multi-class academic filtering, one-tap batch marking, and searchable historical logs.</p>
 
                                 <div class="project-footer">
                                     <button
@@ -3378,22 +3441,44 @@
             const certSlideRight = document.getElementById('certSlideRight');
             const certFullModal = document.getElementById('cert-full-modal');
 
-            function getCertScrollAmount() {
-                if (!certSliderTrack) return 369;
-                const firstCard = certSliderTrack.querySelector('.cert-card');
-                const gap = parseFloat(window.getComputedStyle(certSliderTrack).gap) || 24;
-                return (firstCard ? firstCard.offsetWidth : 345) + gap;
+            /* Precise card-by-card scroll navigation (prevents skipping) */
+            function scrollSliderTrack(track, direction, cardSelector) {
+                if (!track) return;
+                const cards = Array.from(track.querySelectorAll(cardSelector));
+                if (!cards.length) return;
+
+                const trackLeft = track.getBoundingClientRect().left;
+                if (direction > 0) {
+                    // Moving forward: find the next card whose left edge is past trackLeft + 25px
+                    const nextCard = cards.find(card => card.getBoundingClientRect().left > trackLeft + 25);
+                    if (nextCard) {
+                        const delta = nextCard.getBoundingClientRect().left - trackLeft;
+                        track.scrollBy({ left: delta, behavior: 'smooth' });
+                    }
+                } else {
+                    // Moving backward: find the card preceding current view
+                    const prevCards = cards.filter(card => card.getBoundingClientRect().left < trackLeft - 25);
+                    if (prevCards.length > 0) {
+                        const prevCard = prevCards[prevCards.length - 1];
+                        const delta = prevCard.getBoundingClientRect().left - trackLeft;
+                        track.scrollBy({ left: delta, behavior: 'smooth' });
+                    } else {
+                        track.scrollTo({ left: 0, behavior: 'smooth' });
+                    }
+                }
             }
 
             if (certSlideLeft && certSliderTrack) {
                 certSlideLeft.addEventListener('click', function () {
-                    certSliderTrack.scrollBy({ left: -getCertScrollAmount(), behavior: 'smooth' });
+                    this.blur();
+                    scrollSliderTrack(certSliderTrack, -1, '.cert-card');
                 });
             }
 
             if (certSlideRight && certSliderTrack) {
                 certSlideRight.addEventListener('click', function () {
-                    certSliderTrack.scrollBy({ left: getCertScrollAmount(), behavior: 'smooth' });
+                    this.blur();
+                    scrollSliderTrack(certSliderTrack, 1, '.cert-card');
                 });
             }
 
@@ -3404,22 +3489,17 @@
             const projSlideLeft = document.getElementById('projSlideLeft');
             const projSlideRight = document.getElementById('projSlideRight');
 
-            function getProjScrollAmount() {
-                if (!projSliderTrack) return 380;
-                const firstCard = projSliderTrack.querySelector('.project-card');
-                const gap = parseFloat(window.getComputedStyle(projSliderTrack).gap) || 24;
-                return (firstCard ? firstCard.offsetWidth : 370) + gap;
-            }
-
             if (projSlideLeft && projSliderTrack) {
                 projSlideLeft.addEventListener('click', function () {
-                    projSliderTrack.scrollBy({ left: -getProjScrollAmount(), behavior: 'smooth' });
+                    this.blur();
+                    scrollSliderTrack(projSliderTrack, -1, '.project-card');
                 });
             }
 
             if (projSlideRight && projSliderTrack) {
                 projSlideRight.addEventListener('click', function () {
-                    projSliderTrack.scrollBy({ left: getProjScrollAmount(), behavior: 'smooth' });
+                    this.blur();
+                    scrollSliderTrack(projSliderTrack, 1, '.project-card');
                 });
             }
 
