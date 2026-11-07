@@ -458,6 +458,23 @@ A follow-up was needed because PHP's ZIP extension was disabled; the AI enabled 
 
 ---
 
+## Prompt 37: Add Back to Top Button / Up Arrow Key to Footer on PC and Mobile
+
+**Prompt:** "there should be a back to top icon/up arrow key on the footer on both pc and cp"
+
+**AI Response:** 
+1. **Added Back to Top Button in Footer:** Included a sleek circular Up Arrow button (`<a href="#top" class="back-to-top-btn">...</a>`) inside `.footer-inner`, positioned on the right side across both desktop (PC) and mobile (CP) views.
+2. **Responsive Styling:**
+   - On PC: Features a 42px circular surface button with chevron icon, elevating with an accent blue glow and lift animation on hover (`transform: translateY(-3px)`).
+   - On Mobile (CP): Sized at 38px, aligning neatly alongside the copyright text in a single row without wrapping or crowding.
+   - Touch Feedback: Non-sticky `:active` tap state with momentary scale feedback on touch devices.
+3. **Smooth Scroll Behavior:** Connected with a smooth scroll handler (`window.scrollTo({ top: 0, behavior: 'smooth' })`) with a native anchor link fallback (`#top`).
+4. **Synchronized and Built:** Updated `portfolio.blade.php`, `index.html`, and compiled production bundle with Vite (`npm run build`).
+
+**What I did:** Tested smooth back-to-top scrolling from the footer on both desktop and mobile viewports, verified theme compatibility, and pushed to GitHub `origin main`.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:

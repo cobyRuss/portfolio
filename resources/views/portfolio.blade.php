@@ -1527,7 +1527,7 @@
         }
 
         /* ==========================================================================
-           Slim Footer (Copyright Text Only)
+           Slim Footer (Copyright & Back to Top)
            ========================================================================== */
         .site-footer {
             position: relative;
@@ -1535,20 +1535,78 @@
             background: var(--footer-bg);
             border-top: 1px solid var(--section-divider);
             color: #94a3b8;
-            padding: 1.65rem 0;
+            padding: 1.5rem 0;
         }
 
         .footer-inner {
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
+            justify-content: space-between;
+            gap: 1rem;
         }
 
         .footer-copy {
             font-size: 0.9rem;
             color: #cbd5e1;
             font-weight: 500;
+        }
+
+        .back-to-top-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.22s var(--ease-out), border-color 0.22s var(--ease-out), transform 0.22s var(--ease-out), color 0.22s var(--ease-out), box-shadow 0.22s var(--ease-out);
+            flex-shrink: 0;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            outline: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .back-to-top-btn:hover {
+                background: var(--btn-primary-bg);
+                border-color: var(--btn-primary-bg);
+                color: #ffffff;
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+            }
+
+            .back-to-top-btn:hover svg {
+                transform: translateY(-2px);
+            }
+        }
+
+        @media (hover: none), (pointer: coarse) {
+            .back-to-top-btn:active {
+                transform: scale(0.92);
+                background: var(--btn-primary-bg);
+                color: #ffffff;
+            }
+        }
+
+        .back-to-top-btn svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.22s var(--ease-out);
+        }
+
+        [data-theme="light"] .back-to-top-btn {
+            background: #ffffff;
+            border-color: var(--border);
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .back-to-top-btn:hover {
+            background: var(--btn-primary-bg);
+            color: #ffffff;
+            border-color: var(--btn-primary-bg);
         }
 
         /* ==========================================================================
@@ -2019,6 +2077,17 @@
             }
             .project-footer {
                 padding-top: 0.85rem;
+            }
+            .footer-copy {
+                font-size: 0.8rem;
+            }
+            .back-to-top-btn {
+                width: 38px;
+                height: 38px;
+            }
+            .back-to-top-btn svg {
+                width: 18px;
+                height: 18px;
             }
         }
 
@@ -2542,6 +2611,11 @@
     <footer class="site-footer">
         <div class="container footer-inner">
             <p class="footer-copy">&copy; 2026 Russel Tristan L. Marzo &middot; Coby</p>
+            <a href="#top" class="back-to-top-btn" aria-label="Back to top" title="Back to top">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </a>
         </div>
     </footer>
 
@@ -2985,6 +3059,14 @@
                     if (navToggle) navToggle.checked = false;
                 });
             });
+
+            const backToTopBtn = document.querySelector('.back-to-top-btn');
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
         })();
     </script>
 </body>
