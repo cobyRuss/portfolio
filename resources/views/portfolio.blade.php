@@ -1252,16 +1252,43 @@
         /* ==========================================================================
            Projects Section
            ========================================================================== */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 2rem;
+        /* Projects Horizontal Slider */
+        .projects-slider-wrapper {
+            position: relative;
         }
 
-        .project-card {
+        .projects-slider-track {
+            display: flex;
+            align-items: stretch;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            padding: 0.5rem 0.25rem 1.25rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .projects-slider-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .projects-slider-track .project-card {
+            flex: 0 0 370px;
+            width: 370px;
+            max-width: 370px;
+            scroll-snap-align: start;
+            border-radius: var(--radius-lg);
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+        }
+
+        .projects-slider-track .project-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--card-hover-border);
+            box-shadow: var(--card-hover-shadow);
         }
 
         .project-media-btn {
@@ -1277,6 +1304,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .project-media-btn img {
@@ -1308,7 +1336,7 @@
         }
 
         .project-body {
-            padding: 1.75rem;
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
             flex: 1;
@@ -1327,42 +1355,75 @@
         }
 
         .project-title {
-            font-size: 1.22rem;
+            font-size: 1.18rem;
             font-weight: 700;
-            margin-bottom: 0.6rem;
+            line-height: 1.35;
+            margin-bottom: 0.65rem;
+            color: var(--text-primary);
         }
 
         .project-desc {
             color: var(--text-secondary);
-            font-size: 0.94rem;
-            line-height: 1.7;
+            font-size: 0.92rem;
+            line-height: 1.65;
             margin-bottom: 1.25rem;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.45rem;
-            margin-top: auto;
-            margin-bottom: 1.25rem;
-        }
-
-        .project-tag {
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 0.25rem 0.65rem;
-            border-radius: 8px;
-            background: var(--chip-bg);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
+            flex: 1;
         }
 
         .project-footer {
+            margin-top: auto;
             padding-top: 1rem;
             border-top: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
+        }
+
+        .proj-slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 12;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px solid var(--border-hover);
+            background: rgba(17, 26, 46, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #f8fafc;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(2, 6, 23, 0.55);
+            transition: background-color 0.22s var(--ease-out), border-color 0.22s var(--ease-out), transform 0.22s var(--ease-out), opacity 0.22s;
+        }
+
+        [data-theme="light"] .proj-slider-arrow {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .proj-slider-arrow:hover {
+            background: var(--btn-primary-bg);
+            border-color: var(--btn-primary-bg);
+            color: #ffffff;
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .proj-slider-arrow svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .proj-arrow-left {
+            left: -20px;
+        }
+
+        .proj-arrow-right {
+            right: -20px;
         }
 
         /* ==========================================================================
@@ -1762,8 +1823,23 @@
                 text-align: left;
             }
 
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .projects-slider-track .project-card {
+                flex: 0 0 320px;
+                width: 320px;
+                max-width: 86vw;
+            }
+
+            .proj-slider-arrow {
+                width: 40px;
+                height: 40px;
+            }
+
+            .proj-arrow-left {
+                left: -10px;
+            }
+
+            .proj-arrow-right {
+                right: -10px;
             }
 
             .certifications-slider-track .cert-card {
@@ -1799,6 +1875,26 @@
             .contact-grid {
                 grid-template-columns: 1fr;
                 max-width: 420px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .projects-slider-track .project-card {
+                flex: 0 0 86vw;
+                width: 86vw;
+                max-width: 86vw;
+            }
+            .project-body {
+                padding: 1.2rem;
+            }
+            .project-title {
+                font-size: 1.08rem;
+            }
+            .proj-arrow-left {
+                left: -6px;
+            }
+            .proj-arrow-right {
+                right: -6px;
             }
         }
 
@@ -2157,68 +2253,82 @@
                     <p>Selected web and offline applications built to solve real-world workflows.</p>
                 </div>
 
-                <div class="projects-grid">
-                    @foreach($projects as $projIndex => $project)
-                        @php
-                            $slideImages = !empty($project['images']) ? $project['images'] : [''];
-                            $imageCount = !empty($project['images']) ? count($project['images']) : 0;
-                        @endphp
-                        <article class="card-surface project-card fade-in" style="--delay: {{ number_format(0.1 * ($projIndex + 1), 2) }}s;">
-                            <!-- Structural Placeholder: Project Cover Image (Opens Modal Slider with Prev/Next) -->
-                            <button
-                                type="button"
-                                class="project-media-btn"
-                                data-title="{{ $project['title'] }}"
-                                data-images='@json($slideImages)'
-                                onclick="openGalleryFromTrigger(this)"
-                                aria-label="Open screenshot slider for {{ $project['title'] }}"
-                            >
-                                @if($imageCount > 0 && !empty($project['images'][0]))
-                                    <img
-                                        src="{{ $project['images'][0] }}"
-                                        alt="{{ $project['title'] }} preview"
-                                        loading="lazy"
-                                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                                    >
-                                @endif
-                                <div class="media-placeholder" style="{{ ($imageCount > 0 && !empty($project['images'][0])) ? 'display: none;' : 'display: flex;' }}">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                        <polyline points="21 15 16 10 5 21"></polyline>
-                                    </svg>
-                                    <span>Project Screenshot Placeholder</span>
+                <div class="projects-slider-wrapper">
+                    <button type="button" id="projSlideLeft" class="proj-slider-arrow proj-arrow-left" aria-label="Slide projects left">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+
+                    <div class="projects-slider-track" id="projSliderTrack">
+                        @foreach($projects as $projIndex => $project)
+                            @php
+                                $slideImages = !empty($project['images']) ? $project['images'] : [''];
+                                $imageCount = !empty($project['images']) ? count($project['images']) : 0;
+                            @endphp
+                            <article class="card-surface project-card fade-in" style="--delay: {{ number_format(0.1 * ($projIndex + 1), 2) }}s;">
+                                <!-- Structural Placeholder: Project Cover Image (Opens Modal Slider with Prev/Next) -->
+                                <button
+                                    type="button"
+                                    class="project-media-btn"
+                                    data-title="{{ $project['title'] }}"
+                                    data-images='@json($slideImages)'
+                                    onclick="openGalleryFromTrigger(this)"
+                                    aria-label="Open screenshot slider for {{ $project['title'] }}"
+                                >
+                                    @if($imageCount > 0 && !empty($project['images'][0]))
+                                        <img
+                                            src="{{ $project['images'][0] }}"
+                                            alt="{{ $project['title'] }} preview"
+                                            loading="lazy"
+                                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                        >
+                                    @endif
+                                    <div class="media-placeholder" style="{{ ($imageCount > 0 && !empty($project['images'][0])) ? 'display: none;' : 'display: flex;' }}">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                            <polyline points="21 15 16 10 5 21"></polyline>
+                                        </svg>
+                                        <span>Project Screenshot Placeholder</span>
+                                    </div>
+
+                                    <span class="project-count-badge">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                            <polyline points="21 15 16 10 5 21"></polyline>
+                                        </svg>
+                                        {{ $imageCount > 0 ? $imageCount . ' Screenshot' . ($imageCount > 1 ? 's' : '') : 'Preview Slider' }}
+                                    </span>
+                                </button>
+
+                                <div class="project-body">
+                                    <span class="project-badge">{{ $project['type'] }}</span>
+                                    <h3 class="project-title">{{ $project['title'] }}</h3>
+                                    <p class="project-desc">{{ $project['description'] }}</p>
+
+                                    <div class="project-footer">
+                                        <button
+                                            type="button"
+                                            class="link-btn"
+                                            data-title="{{ $project['title'] }}"
+                                            data-images='@json($slideImages)'
+                                            onclick="openGalleryFromTrigger(this)"
+                                        >
+                                            Open Gallery Slider &rarr;
+                                        </button>
+                                    </div>
                                 </div>
+                            </article>
+                        @endforeach
+                    </div>
 
-                                <span class="project-count-badge">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                        <polyline points="21 15 16 10 5 21"></polyline>
-                                    </svg>
-                                    {{ $imageCount > 0 ? $imageCount . ' Screenshot' . ($imageCount > 1 ? 's' : '') : 'Preview Slider' }}
-                                </span>
-                            </button>
-
-                            <div class="project-body">
-                                <span class="project-badge">{{ $project['type'] }}</span>
-                                <h3 class="project-title">{{ $project['title'] }}</h3>
-                                <p class="project-desc">{{ $project['description'] }}</p>
-
-                                <div class="project-footer">
-                                    <button
-                                        type="button"
-                                        class="link-btn"
-                                        data-title="{{ $project['title'] }}"
-                                        data-images='@json($slideImages)'
-                                        onclick="openGalleryFromTrigger(this)"
-                                    >
-                                        Open Gallery Slider &rarr;
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-                    @endforeach
+                    <button type="button" id="projSlideRight" class="proj-slider-arrow proj-arrow-right" aria-label="Slide projects right">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </section>
@@ -2618,6 +2728,32 @@
             if (certSlideRight && certSliderTrack) {
                 certSlideRight.addEventListener('click', function () {
                     certSliderTrack.scrollBy({ left: getCertScrollAmount(), behavior: 'smooth' });
+                });
+            }
+
+            /* ----------------------------------------------------------------
+               Projects Horizontal Slider Controls
+               ---------------------------------------------------------------- */
+            const projSliderTrack = document.getElementById('projSliderTrack');
+            const projSlideLeft = document.getElementById('projSlideLeft');
+            const projSlideRight = document.getElementById('projSlideRight');
+
+            function getProjScrollAmount() {
+                if (!projSliderTrack) return 380;
+                const firstCard = projSliderTrack.querySelector('.project-card');
+                const gap = parseFloat(window.getComputedStyle(projSliderTrack).gap) || 24;
+                return (firstCard ? firstCard.offsetWidth : 370) + gap;
+            }
+
+            if (projSlideLeft && projSliderTrack) {
+                projSlideLeft.addEventListener('click', function () {
+                    projSliderTrack.scrollBy({ left: -getProjScrollAmount(), behavior: 'smooth' });
+                });
+            }
+
+            if (projSlideRight && projSliderTrack) {
+                projSlideRight.addEventListener('click', function () {
+                    projSliderTrack.scrollBy({ left: getProjScrollAmount(), behavior: 'smooth' });
                 });
             }
 

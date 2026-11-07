@@ -332,6 +332,20 @@ A follow-up was needed because PHP's ZIP extension was disabled; the AI enabled 
 
 ---
 
+## Prompt 29: Horizontal Slider Track with Uniform Equal-Sized Cards for Projects
+
+**Prompt:** "can you make the projects like the certificates where i can see it verticaly by clickin left right button and make the cards be the same size so it fits other devices like phones."
+
+**AI Response:** 
+1. Converted the projects container into a horizontal slider track (`.projects-slider-track`) with left (`#projSlideLeft`) and right (`#projSlideRight`) smooth navigation arrows, identical to the Certifications slider structure.
+2. Unified all project cards to have identical fixed dimensions (`370px` width on desktop, `320px` / `86vw` on tablets and phones) and equal stretched heights via flex alignment.
+3. Added flexbox distribution to `.project-body` and `.project-desc` (`flex: 1`, `margin-top: auto` for footer) ensuring uniform height and footer button alignment across all cards.
+4. Synchronized changes across `portfolio.blade.php`, `index.html`, and rebuilt Vite static output for deployment.
+
+**What I did:** Tested smooth scrolling with the left/right arrow buttons, verified equal card dimensions and responsive mobile layout.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:
