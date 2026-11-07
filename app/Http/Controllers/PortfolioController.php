@@ -149,6 +149,19 @@ class PortfolioController extends Controller
                     asset('projects/88minimart/6.png'),
                 ],
             ],
+            [
+                'title' => 'Mobile App - Offline Student Attendance System',
+                'type' => 'Mobile Application',
+                'description' => 'An offline-first mobile attendance management application built with Flutter & Dart for seamless classroom session tracking without internet connectivity. Features an instructor workspace dashboard displaying real-time academic stats (active students, enrolled subjects, and daily attendance percentages), interactive attendance recording with multi-criteria session filters (academic year, class section, and subject like Mobile Technology 4A), one-tap batch marking (\'All Present\'), individual status toggles (Present, Late, Absent, Excused) with student ID/photo badges and remark notes, and searchable historical attendance logs with date range filtering and export capabilities.',
+                'tags' => ['Mobile App', 'Flutter', 'Dart', 'Offline System', 'Attendance Tracking'],
+                'images' => [
+                    asset('projects/student_attendance/1.jpg'),
+                    asset('projects/student_attendance/2.jpg'),
+                    asset('projects/student_attendance/3.jpg'),
+                    asset('projects/student_attendance/4.jpg'),
+                    asset('projects/student_attendance/5.jpg'),
+                ],
+            ],
         ];
 
         return view('portfolio', compact('profile', 'education', 'skills', 'certifications', 'projects'));

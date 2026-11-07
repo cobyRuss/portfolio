@@ -318,6 +318,20 @@ A follow-up was needed because PHP's ZIP extension was disabled; the AI enabled 
 
 ---
 
+## Prompt 28: Add Offline Student Attendance System (Flutter Mobile App)
+
+**Prompt:** "add this to projects, its a flutter app, offline stundent attendance. you analyze the pic to have a more specific description"
+
+**AI Response:** 
+1. Extracted and analyzed the 5 mobile screenshots (`1.jpg` to `5.jpg`), identifying the offline workspace dashboard (metrics, academic year, active student counters), session filtering (by subject e.g., Mobile Technology 4A, class section ITCS 4·A), live attendance marking (Present, Late, Absent, Excused with 'All present' batch action), and searchable attendance logs.
+2. Copied all 5 screenshot assets to `public/projects/student_attendance/`.
+3. Added "Mobile App - Offline Student Attendance System" to `$projects` in `PortfolioController.php` with a detailed, tailored description and slider data.
+4. Updated `index.html` with the new project card and screenshot gallery trigger, and compiled the production build with Vite (`npm run build`).
+
+**What I did:** Verified that the 4th project appears on the live site with all 5 screenshots viewable in the gallery slider.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:
