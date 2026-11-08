@@ -475,6 +475,28 @@ A follow-up was needed because PHP's ZIP extension was disabled; the AI enabled 
 
 ---
 
+## Prompt 38: Add Blue RM Logo Favicon for Browser Tab (Replacing Default Globe Icon)
+
+**Prompt:** "on pc there is a web/earth icon before the name, use the blue RM logo on the portfolio"
+
+**AI Response:** 
+1. **Designed RM Favicon Assets:** Created an SVG favicon and high-resolution PNG/ICO assets matching the exact visual identity of the portfolio's blue rounded square logo mark (`.logo-mark`):
+   - Vibrant linear gradient (`linear-gradient(135deg, #2563eb, #38bdf8)`).
+   - Rounded square silhouette (`rx="26%"` border radius).
+   - Centered bold white typography ("RM") with sans-serif system font stack for maximum crispness across all screen densities.
+2. **Multi-Platform Icon Suite:**
+   - `favicon.svg`: Modern, resolution-independent vector icon for Chrome, Edge, Firefox, and Safari.
+   - `favicon.ico`: Embedded 16x16, 32x32, and 48x48 multi-resolution Windows/browser icon replacing the 0-byte placeholder.
+   - `favicon-32x32.png` & `favicon-16x16.png`: Standard PNG fallbacks.
+   - `apple-touch-icon.png`: 180x180 icon for mobile Safari home screen bookmarks.
+   - `favicon-192x192.png` & `favicon-512x512.png`: PWA and Android Chrome launcher icons.
+3. **Updated HTML `<head>`:** Linked all favicon and apple-touch-icon tags in both `resources/views/portfolio.blade.php` and `index.html`.
+4. **Production Build & Verification:** Ran `npm run build` with Vite, verified all icon files were deployed to `dist/`, and confirmed correct browser tab rendering.
+
+**What I did:** Verified that the browser tab on PC and mobile displays the blue gradient RM logo icon instead of the default globe/earth icon, and pushed changes to GitHub `origin main`.
+
+---
+
 ## Notes on AI Collaboration
 
 The AI assistant (opencode/big-pickle) was used for:
